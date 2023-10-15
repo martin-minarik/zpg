@@ -19,13 +19,13 @@ void Application::loop() {
     auto last_time = (float) glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
         const auto now = (float) glfwGetTime();
-        const float delta = now - last_time;
+        this->delta_time = now - last_time;
         last_time = now;
 
         // clear color and depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        scene->update(delta);
+        scene->update(delta_time);
         scene->draw();
 
         glfwPollEvents();
@@ -97,19 +97,21 @@ void Application::print_opengl_info() {
 
 void Application::init_callbacks() {
     glfwSetErrorCallback(error_callback);
-    MouseHandler &mouse_handler = MouseHandler::get_instance();
-    mouse_handler.init_callbacks(this->window);
+//    MouseHandler &mouse_handler = MouseHandler::get_instance();
+//    mouse_handler.init_callbacks(this->window);
 
-}
-
-void Application::cursor_pos_callback(GLFWwindow *window, double mouseX, double mouseY) {
-    printf("cursor_pos_callback %d, %d\n", (int) mouseX, (int) mouseY);
+    KeyBoardHandler &keyboard_handler = KeyBoardHandler::get_instance();
+    keyboard_handler.init_callbacks(this->window);
 }
 
 void Application::error_callback(int error, const char *description) { fputs(description, stderr); }
 
 GLFWwindow *Application::get_window() const {
     return window;
+}
+
+float Application::get_delta_time() const {
+    return delta_time;
 }
 
 

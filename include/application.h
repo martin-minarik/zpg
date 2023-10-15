@@ -18,7 +18,9 @@
 // ZPG
 #include "scene.h"
 #include "mouse_handler.h"
+#include "keyboard_handler.h"
 
+class Scene;
 class Application {
 public:
     virtual ~Application();
@@ -32,6 +34,8 @@ public:
     void run();
 
     [[nodiscard]] GLFWwindow *get_window() const;
+
+    float get_delta_time() const;
 
 private:
     Application() = default;
@@ -50,10 +54,9 @@ private:
 
     static void error_callback(int error, const char *description);
 
-    static void cursor_pos_callback(GLFWwindow *window, double mouseX, double mouseY);
-
 private:
     GLFWwindow *window = nullptr;
-    Scene *scene = nullptr;
+    Scene *scene;
+    float delta_time = 0;
 };
 

@@ -24,9 +24,9 @@ void Camera::notify_shader() {
         observer->camera_update(this);
 }
 
-void Camera::process_mouse_movement(float diff_x, float diff_y) {
-    alpha += diff_x;
-    fi += diff_y;
+void Camera::process_mouse_movement(float diff_x, float diff_y, float delta_time) {
+    alpha += diff_x * delta_time;
+    fi += diff_y * delta_time;
 
     fi = std::max(0.f, std::min(fi, 90.f));
 
@@ -43,6 +43,30 @@ void Camera::process_mouse_movement(float diff_x, float diff_y) {
 
     target = glm::normalize(target);
 
+    calc_view_matrix();
+    notify_shader();
+}
+
+void Camera::move_left(float delta_time) {
+    eye += -( glm::normalize ( glm::cross( target , up ))) * (1.f * delta_time);
+    calc_view_matrix();
+    notify_shader();
+}
+
+void Camera::move_right(float delta_time) {
+    eye += ( glm::normalize ( glm::cross( target , up ))) * (1.f * delta_time);
+    calc_view_matrix();
+    notify_shader();
+}
+
+void Camera::move_forward(float delta_time) {
+    eye += glm::normalize(target) * 0.01f;
+    calc_view_matrix();
+    notify_shader();
+}
+
+void Camera::move_backward(float delta_time) {
+    eye += -glm::normalize(target) * 0.01f;
     calc_view_matrix();
     notify_shader();
 }

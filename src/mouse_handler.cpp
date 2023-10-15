@@ -19,12 +19,13 @@ void MouseHandler::cursor_pos_callback(GLFWwindow *window, double current_x, dou
     } else {
         float x_diff = current_x - last_x;
         float y_diff = current_y - last_y;
+        auto delta_time = Application::get_instance().get_delta_time();
 
         last_x = current_x;
         last_y = current_y;
 
         if (camera)
-            camera->process_mouse_movement(x_diff, y_diff);
+            camera->process_mouse_movement(x_diff, y_diff, delta_time);
     }
 }
 

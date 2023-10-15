@@ -7,11 +7,11 @@
 // Include GLFW
 #include "GLFW/glfw3.h"
 
+#include "application.h"
 #include "camera.h"
 
 class MouseHandler {
 public:
-
     static MouseHandler &get_instance();
 
     MouseHandler(const MouseHandler &) = delete;

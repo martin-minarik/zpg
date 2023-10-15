@@ -81,6 +81,7 @@ void Scene::init_camera() {
     }
 
     MouseHandler::get_instance().set_camera(this->camera);
+    KeyBoardHandler::get_instance().set_camera(this->camera);
 }
 
 void Scene::draw() {
@@ -90,8 +91,8 @@ void Scene::draw() {
     }
 }
 
-void Scene::update(float delta) {
-    drawable_objects[0]->transform.add(new Rotate(5 * delta, glm::vec3(0, 1, 0)));
+void Scene::update(float delta_time) {
+    drawable_objects[0]->transform.add(new Rotate(5 * delta_time, glm::vec3(0, 1, 0)));
     drawable_objects[0]->transform.apply();
 }
 

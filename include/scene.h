@@ -22,7 +22,7 @@ public:
 
     void draw();
 
-    void update(float delta);
+    void update(float delta_time);
 
 private:
     void init();

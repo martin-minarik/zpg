@@ -30,7 +30,12 @@ public:
 
     void notify_shader();
 
-    void process_mouse_movement(float diff_x, float diff_y);
+    void process_mouse_movement(float diff_x, float diff_y, float delta_time);
+
+    void move_left(float delta_time);
+    void move_right(float delta_time);
+    void move_forward(float delta_time);
+    void move_backward(float delta_time);
 
     glm::mat4 projection_matrix = glm::perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
     glm::mat4 view_matrix = glm::mat4{1.f};
@@ -40,6 +45,6 @@ private:
     float fi = 0.f;
     std::vector<Shader *> observers;
     glm::vec3 eye{0.f, 0.f, 2.f};
-    glm::vec3 target{0.f, 0.f, -1.f};
+    glm::vec3 target{0.f, 0.f, -1.5f};
     glm::vec3 up{0.f, 1.f, 0.f};
 };
