@@ -17,6 +17,7 @@
 
 // ZPG
 #include "scene.h"
+#include "mouse_handler.h"
 
 class Application {
 public:
@@ -29,6 +30,8 @@ public:
     Application &operator=(const Application &) = delete;
 
     void run();
+
+    [[nodiscard]] GLFWwindow *get_window() const;
 
 private:
     Application() = default;
@@ -48,7 +51,6 @@ private:
     static void error_callback(int error, const char *description);
 
     static void cursor_pos_callback(GLFWwindow *window, double mouseX, double mouseY);
-
 
 private:
     GLFWwindow *window = nullptr;

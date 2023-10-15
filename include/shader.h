@@ -7,7 +7,8 @@
 //Include GLEW
 #include <GL/glew.h>
 
-class Shader {
+class Camera;
+class Shader{
 public:
     Shader(char *vertex_shader_str, char *fragment_shader_str);
 
@@ -15,6 +16,8 @@ public:
 
     GLint get_uniform_location(const char *name) const;
     void upload_matrix(const char *name, glm::mat4 &matrix) const;
+
+    void camera_update(Camera *camera) const;
 
 private:
     void check_link_status() const;

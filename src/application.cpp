@@ -97,19 +97,20 @@ void Application::print_opengl_info() {
 
 void Application::init_callbacks() {
     glfwSetErrorCallback(error_callback);
+    MouseHandler &mouse_handler = MouseHandler::get_instance();
+    mouse_handler.init_callbacks(this->window);
 
-
-    glfwSetCursorPosCallback(window, [](GLFWwindow *window, double mouseXPos, double mouseYPos) -> void {
-        Application::get_instance().cursor_pos_callback(window, mouseXPos, mouseYPos);
-    });
 }
 
 void Application::cursor_pos_callback(GLFWwindow *window, double mouseX, double mouseY) {
     printf("cursor_pos_callback %d, %d\n", (int) mouseX, (int) mouseY);
-
 }
 
 void Application::error_callback(int error, const char *description) { fputs(description, stderr); }
+
+GLFWwindow *Application::get_window() const {
+    return window;
+}
 
 
 
