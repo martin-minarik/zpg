@@ -1,12 +1,7 @@
 #include "scene.h"
-#include "plain.h"
-#include "sphere.h"
-#include "suzi_flat.h"
-#include "suzi_smooth.h"
 
 Scene::Scene() {
-    init_shader();
-    init_shapes();
+    init();
 }
 
 Scene::~Scene() {
@@ -14,6 +9,21 @@ Scene::~Scene() {
         delete item.second;
         item.second = nullptr;
     }
+
+    for (auto &model: models) {
+        delete model;
+    }
+
+    for (auto &drawable_object: drawable_objects) {
+        delete drawable_object;
+    }
+}
+
+void Scene::init() {
+    this->init_shader();
+    this->init_drawable_objects();
+    this->init_camera();
+
 }
 
 void Scene::init_shader() {
@@ -25,6 +35,7 @@ void Scene::init_shader() {
             "uniform mat4 model_matrix;"
             "void main () {"
             "     gl_Position = model_matrix * vec4(vertex_position, 1);"
+            //            "     gl_Position = vec4(vertex_position, 1);"
             "     color  = vertex_color;"
             "}";
 
@@ -58,21 +69,29 @@ void Scene::init_shader() {
     this->shaders["green"] = new Shader(vertex_shader, fragment_shader_green);
 }
 
-void Scene::init_shapes() {
-    shapes.emplace_back(SUZI_SMOOTH_VERTICES, *shaders["vertex_color"]);
-//    shapes.emplace_back(Shape::SQUARE_VERTICES, *shaders["vertex_color"]);
-//    shapes.emplace_back(Shape::TRIANGLE_VERTICES, *shaders["green"]);
-//    shapes.emplace_back(Shape::TRIANGLE_VERTICES, *shaders["vertex_color"]);
-//    shapes.emplace_back(Shape::SQUARE_VERTICES, *shaders["yellow"]);
+void Scene::init_drawable_objects() {
+    Model *suzie_model = ModelFactory::create_by_name("suzie-flat");
+    this->models.push_back(suzie_model);
+
+    drawable_objects.push_back(new DrawableObject(*suzie_model, *shaders["vertex_color"]));
+}
+
+void Scene::init_camera() {
+
 }
 
 void Scene::draw() {
-    for (auto &shape: shapes) {
-        shape.draw();
+    for (auto &drawable_object: drawable_objects) {
+        drawable_object->draw();
     }
 }
 
 void Scene::update(float delta) {
-    shapes[0].transform.add(new Rotate(5 * delta, glm::vec3(0, 1, 0)));
-    shapes[0].transform.apply();
+    drawable_objects[0]->transform.add(new Rotate(5 * delta, glm::vec3(0, 1, 0)));
+    drawable_objects[0]->transform.apply();
 }
+
+
+
+
+

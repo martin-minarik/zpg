@@ -18,7 +18,7 @@ find_package(OpenGL REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Get the list of source files
-file(GLOB SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

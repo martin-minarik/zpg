@@ -1,8 +1,7 @@
-#pragma once
+//6
+//glDrawArrays(GL_TRIANGLES, 0, 6);
 
-#include <vector>
-
-const std::vector<float> PLAIN_VERTICES = {
+const float plain[36] = {
     1.0f, 0.0f,  1.0f, 0.0f, 1.0f, 0.0f,
     1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
    -1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
@@ -10,4 +9,5 @@ const std::vector<float> PLAIN_VERTICES = {
    -1.0f, 0.0f,  1.0f, 0.0f, 1.0f, 0.0f,
     1.0f, 0.0f,  1.0f, 0.0f, 1.0f, 0.0f,
    -1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f
+
 };
