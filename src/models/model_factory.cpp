@@ -7,6 +7,9 @@ Model *ModelFactory::create_by_name(const std::string &name) {
     } else if (name == "square") {
         return create_square();
 
+    } else if (name == "cube") {
+        return create_cube();
+
     } else if (name == "plain") {
         return create_plain();
 
@@ -29,6 +32,10 @@ Model *ModelFactory::create_triangle() {
 
 Model *ModelFactory::create_square() {
     return new Model(square, sizeof(square) / sizeof(float), 36);
+}
+
+Model *ModelFactory::create_cube() {
+    return new Model(cube, sizeof(cube) / sizeof(float), 144);
 }
 
 Model *ModelFactory::create_plain() {

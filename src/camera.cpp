@@ -33,7 +33,7 @@ void Camera::process_mouse_movement(float diff_x, float diff_y, float delta_time
     alpha += diff_x * delta_time * 10;
 //    fi += diff_y * delta_time;
 
-    alpha = std::max(0.f, std::min(alpha, 360.f));
+//    alpha = std::max(0.f, std::min(alpha, 360.f));
 
     // Only horizontal movement
     target.x = glm::sin(glm::radians(alpha)) * glm::cos(glm::radians(fi));

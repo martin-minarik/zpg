@@ -67,6 +67,7 @@ void Scene::init_shader() {
 }
 
 void Scene::init_drawable_objects() {
+    Model *cube = ModelFactory::create_by_name("cube");
     Model *sphere_model = ModelFactory::create_by_name("sphere");
     Model *suzie_flat = ModelFactory::create_by_name("suzie-flat");
     Model *suzie_smooth = ModelFactory::create_by_name("suzie-smooth");
@@ -75,19 +76,23 @@ void Scene::init_drawable_objects() {
     this->models.push_back(suzie_smooth);
 
     drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
-    drawable_objects.push_back(new DrawableObject(*suzie_smooth, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*cube, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*suzie_smooth, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
 }
 
 void Scene::init_transformations() {
     this->rotation.reset(new Rotation(0, glm::vec3(0, 1, 0)));
 
-    drawable_objects[0]->transformation.add(
-            std::make_shared<Scale>(glm::vec3(0.3)));
+
     drawable_objects[0]->transformation.add(rotation);
+    drawable_objects[0]->transformation.add(
+            std::make_shared<Rotation>(180, glm::vec3(0, 0, 1)));
+    drawable_objects[0]->transformation.add(
+            std::make_shared<Scale>(glm::vec3(0.3, 0.3, 0.3)));
 
 
     drawable_objects[1]->transformation.add(
@@ -113,6 +118,16 @@ void Scene::init_transformations() {
 
     drawable_objects[5]->transformation.add(
             std::make_shared<Translation>(glm::vec3(-2, -2, -2)));
+
+
+    drawable_objects[6]->transformation.add(
+            std::make_shared<Translation>(glm::vec3(0, 0, -2)));
+    drawable_objects[6]->transformation.add(
+            std::make_shared<Scale>(glm::vec3(0.3, 0.3, 0.3)));
+
+    for (auto &drawable_object: this->drawable_objects) {
+        drawable_object->transformation.apply();
+    }
 }
 
 void Scene::init_camera() {
