@@ -18,11 +18,13 @@
 //#include "shader.h"
 class Shader;
 
-class Camera {
+class Camera
+{
 public:
     Camera();
 
     void calc_view_matrix();
+
     void calc_projection_matrix(float fov, float ratio, float near, float far);
 
 
@@ -35,8 +37,11 @@ public:
     void process_mouse_movement(float diff_x, float diff_y, float delta_time);
 
     void move_left(float delta_time);
+
     void move_right(float delta_time);
+
     void move_forward(float delta_time);
+
     void move_backward(float delta_time);
 
     glm::mat4 projection_matrix = glm::mat4{1.f};
@@ -45,6 +50,7 @@ public:
 private:
     float alpha = 0.f;
     float fi = 0.f;
+    float mouse_speed = 20;
     std::vector<Shader *> observers;
     glm::vec3 eye{0.f, 0.f, 5.f};
     glm::vec3 target{0.0f, 0.f, -1.f};
