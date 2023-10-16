@@ -39,9 +39,14 @@ GLint Shader::get_uniform_location(const char *name) const {
     return glGetUniformLocation(shader_program, name);
 }
 
-void Shader::upload_matrix(const char *name, glm::mat4 &matrix) const {
+void Shader::upload_matrix(const char *name, const glm::mat4 &matrix) const {
     GLint variable = get_uniform_location(name);
     glUniformMatrix4fv(variable, 1, GL_FALSE, &matrix[0][0]);
+}
+
+void Shader::upload_transformation(TransformationComponent *transformationComponent) const {
+//    this->use();
+    this->upload_matrix("model_matrix", transformationComponent->get_matrix());
 }
 
 void Shader::camera_update(Camera *camera) const {
@@ -49,3 +54,5 @@ void Shader::camera_update(Camera *camera) const {
     this->upload_matrix("projection_matrix", camera->projection_matrix);
     this->upload_matrix("view_matrix", camera->view_matrix);
 }
+
+

@@ -1,9 +1,13 @@
 #pragma once
 
 #include <vector>
+
 #include <GL/glew.h>
+
 #include "shader.h"
-#include "transformation/transform.h"
+#include "transformation/transformation_composite.h"
+#include "transformation/transformation_component.h"
+#include "models/model.h"
 #include "models/model.h"
 
 class DrawableObject {
@@ -12,9 +16,11 @@ public:
 
     void draw();
 
+
 public:
+    TransformationComposite transformation;
+
+private:
     Shader &shader;
     Model &model;
-
-    Transformation transform;
 };

@@ -25,7 +25,7 @@ void Scene::init() {
     this->init_shader();
     this->init_drawable_objects();
     this->init_camera();
-
+    this->init_transformations();
 }
 
 void Scene::init_shader() {
@@ -74,35 +74,45 @@ void Scene::init_drawable_objects() {
     this->models.push_back(suzie_flat);
     this->models.push_back(suzie_smooth);
 
-//    drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*suzie_smooth, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
-    drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
-    drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*suzie_smooth, *shaders["vertex_color"]));
+}
+
+void Scene::init_transformations() {
+    this->rotation.reset(new Rotation(0, glm::vec3(0, 1, 0)));
+
+    drawable_objects[0]->transformation.add(
+            std::make_shared<Scale>(glm::vec3(0.3)));
+    drawable_objects[0]->transformation.add(rotation);
 
 
+    drawable_objects[1]->transformation.add(
+            std::make_shared<Translation>(glm::vec3(0, 0, -5)));
+    drawable_objects[1]->transformation.add(
+            std::make_shared<Rotation>(180, glm::vec3(0, 0, 1)));
+    drawable_objects[1]->transformation.add(rotation);
 
-    drawable_objects[0]->transform.add(new Scale(glm::vec3(0.3)));
-    drawable_objects[0]->transform.apply();
 
-    drawable_objects[1]->transform.add(new Translate(glm::vec3(2, 2, -2)));
-    drawable_objects[1]->transform.apply();
+    drawable_objects[2]->transformation.add(
+            std::make_shared<Translation>(glm::vec3(2, 2, -2)));
 
-    drawable_objects[2]->transform.add(new Translate(glm::vec3(-2, 2, -2)));
-    drawable_objects[2]->transform.add(new Scale(glm::vec3(0.3)));
-    drawable_objects[2]->transform.apply();
 
-    drawable_objects[3]->transform.add(new Translate(glm::vec3(2, -2, -2)));
-    drawable_objects[3]->transform.apply();
+    drawable_objects[3]->transformation.add(
+            std::make_shared<Translation>(glm::vec3(-2, 2, -2)));
+    drawable_objects[3]->transformation.add(
+            std::make_shared<Scale>(glm::vec3(0.3)));
 
-    drawable_objects[4]->transform.add(new Translate(glm::vec3(-2, -2, -2)));
-    drawable_objects[4]->transform.apply();
 
-    drawable_objects[5]->transform.add(new Rotate(160, glm::vec3(0, 0, 1)));
-    drawable_objects[5]->transform.add(new Translate(glm::vec3(0, 0, -5)));
-    drawable_objects[5]->transform.apply();
+    drawable_objects[4]->transformation.add(
+            std::make_shared<Translation>(glm::vec3(2, -2, -2)));
+
+
+    drawable_objects[5]->transformation.add(
+            std::make_shared<Translation>(glm::vec3(-2, -2, -2)));
 }
 
 void Scene::init_camera() {
@@ -123,9 +133,12 @@ void Scene::draw() {
 }
 
 void Scene::update(float delta_time) {
-    drawable_objects[0]->transform.add(new Rotate(5 * delta_time, glm::vec3(0, 1, 0)));
-    drawable_objects[0]->transform.apply();
+    rotation->set_angle(rotation->get_angle() + 50 * delta_time);
+    for (auto &drawable_object: this->drawable_objects) {
+        drawable_object->transformation.apply();
+    }
 }
+
 
 
 

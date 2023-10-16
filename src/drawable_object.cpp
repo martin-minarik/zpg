@@ -6,6 +6,6 @@ DrawableObject::DrawableObject(Model &model, Shader &shader) : model(model), sha
 
 void DrawableObject::draw() {
     shader.use();
-    shader.upload_matrix("model_matrix", this->transform.matrix);
+    shader.upload_transformation(reinterpret_cast<TransformationComponent *>(&this->transformation));
     model.draw();
 }
