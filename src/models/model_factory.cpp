@@ -27,30 +27,30 @@ Model *ModelFactory::create_by_name(const std::string &name) {
 }
 
 Model *ModelFactory::create_triangle() {
-    return new Model(triangle, sizeof(triangle) / sizeof(float), 18);
+    return new Model(triangle, 18);
 }
 
 Model *ModelFactory::create_square() {
-    return new Model(square, sizeof(square) / sizeof(float), 36);
+    return new Model(square, 36);
 }
 
 Model *ModelFactory::create_cube() {
-    return new Model(cube, sizeof(cube) / sizeof(float), 144);
+    return new Model(cube, 144);
 }
 
 Model *ModelFactory::create_plain() {
-    return new Model(plain, sizeof(plain) / sizeof(float), 36);
+    return new Model(plain, 36);
 }
 
 Model *ModelFactory::create_sphere() {
-    return new Model(sphere, sizeof(sphere) / sizeof(float), 2880);
+    return new Model(sphere, 2880);
 }
 
 Model *ModelFactory::create_suzie(bool smooth) {
     if (smooth)
-        return new Model(suziSmooth, sizeof(suziSmooth) / sizeof(float), 2904);
+        return new Model(suziSmooth, 2904);
 
-    return new Model(suziFlat, sizeof(suziFlat) / sizeof(float), 2904);
+    return new Model(suziFlat, 2904);
 }
 
 

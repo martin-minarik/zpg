@@ -41,3 +41,6 @@ void Model::make_vao() {
             sizeof(float) * 6,
             (GLvoid *) (sizeof(float) * 3));
 }
+
+
+
