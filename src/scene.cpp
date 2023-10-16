@@ -67,16 +67,17 @@ void Scene::init_shader() {
 }
 
 void Scene::init_drawable_objects() {
-    Model *cube = ModelFactory::create_by_name("cube");
+    Model *cube_model = ModelFactory::create_by_name("cube");
     Model *sphere_model = ModelFactory::create_by_name("sphere");
     Model *suzie_flat = ModelFactory::create_by_name("suzie-flat");
     Model *suzie_smooth = ModelFactory::create_by_name("suzie-smooth");
+    this->models.push_back(cube_model);
     this->models.push_back(sphere_model);
     this->models.push_back(suzie_flat);
     this->models.push_back(suzie_smooth);
 
     drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
-    drawable_objects.push_back(new DrawableObject(*cube, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*cube_model, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
     drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
