@@ -97,8 +97,8 @@ void Application::print_opengl_info() {
 
 void Application::init_callbacks() {
     glfwSetErrorCallback(error_callback);
-//    MouseHandler &mouse_handler = MouseHandler::get_instance();
-//    mouse_handler.init_callbacks(this->window);
+    MouseHandler &mouse_handler = MouseHandler::get_instance();
+    mouse_handler.init_callbacks(this->window);
 
     KeyBoardHandler &keyboard_handler = KeyBoardHandler::get_instance();
     keyboard_handler.init_callbacks(this->window);

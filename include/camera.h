@@ -23,6 +23,8 @@ public:
     Camera();
 
     void calc_view_matrix();
+    void calc_projection_matrix(float fov, float ratio, float near, float far);
+
 
     void attach_shader(Shader *observer);
 
@@ -37,14 +39,14 @@ public:
     void move_forward(float delta_time);
     void move_backward(float delta_time);
 
-    glm::mat4 projection_matrix = glm::perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+    glm::mat4 projection_matrix = glm::mat4{1.f};
     glm::mat4 view_matrix = glm::mat4{1.f};
 
 private:
     float alpha = 0.f;
     float fi = 0.f;
     std::vector<Shader *> observers;
-    glm::vec3 eye{0.f, 0.f, 2.f};
-    glm::vec3 target{0.f, 0.f, -1.5f};
+    glm::vec3 eye{0.f, 0.f, 5.f};
+    glm::vec3 target{0.0f, 0.f, -1.f};
     glm::vec3 up{0.f, 1.f, 0.f};
 };

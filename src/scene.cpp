@@ -67,10 +67,42 @@ void Scene::init_shader() {
 }
 
 void Scene::init_drawable_objects() {
-    Model *suzie_model = ModelFactory::create_by_name("sphere");
-    this->models.push_back(suzie_model);
+    Model *sphere_model = ModelFactory::create_by_name("sphere");
+    Model *suzie_flat = ModelFactory::create_by_name("suzie-flat");
+    Model *suzie_smooth = ModelFactory::create_by_name("suzie-smooth");
+    this->models.push_back(sphere_model);
+    this->models.push_back(suzie_flat);
+    this->models.push_back(suzie_smooth);
 
-    drawable_objects.push_back(new DrawableObject(*suzie_model, *shaders["vertex_color"]));
+//    drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*suzie_smooth, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*sphere_model, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
+    drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
+
+
+
+    drawable_objects[0]->transform.add(new Scale(glm::vec3(0.3)));
+    drawable_objects[0]->transform.apply();
+
+    drawable_objects[1]->transform.add(new Translate(glm::vec3(2, 2, -2)));
+    drawable_objects[1]->transform.apply();
+
+    drawable_objects[2]->transform.add(new Translate(glm::vec3(-2, 2, -2)));
+    drawable_objects[2]->transform.add(new Scale(glm::vec3(0.3)));
+    drawable_objects[2]->transform.apply();
+
+    drawable_objects[3]->transform.add(new Translate(glm::vec3(2, -2, -2)));
+    drawable_objects[3]->transform.apply();
+
+    drawable_objects[4]->transform.add(new Translate(glm::vec3(-2, -2, -2)));
+    drawable_objects[4]->transform.apply();
+
+    drawable_objects[5]->transform.add(new Rotate(160, glm::vec3(0, 0, 1)));
+    drawable_objects[5]->transform.add(new Translate(glm::vec3(0, 0, -5)));
+    drawable_objects[5]->transform.apply();
 }
 
 void Scene::init_camera() {
@@ -79,13 +111,12 @@ void Scene::init_camera() {
     for (auto &item: shaders) {
         this->camera->attach_shader(item.second);
     }
-
+    camera->notify_shader();
     MouseHandler::get_instance().set_camera(this->camera);
     KeyBoardHandler::get_instance().set_camera(this->camera);
 }
 
 void Scene::draw() {
-    camera->notify_shader();
     for (auto &drawable_object: drawable_objects) {
         drawable_object->draw();
     }
