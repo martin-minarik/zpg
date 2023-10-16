@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include <stdexcept>
 
 #include "models/model.h"
 #include "models/vertices/triangle.h"
