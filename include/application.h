@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-
 // Include Glew
 #include "GL/glew.h"
 // Include GLFW

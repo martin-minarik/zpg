@@ -19,8 +19,7 @@
 #include "transformation/rotation.h"
 
 
-class Scene
-{
+class Scene {
 public:
     Scene();
 
@@ -43,8 +42,8 @@ private:
 
 
     Camera *camera;
-    std::vector<Model*> models;
-    std::vector<DrawableObject*> drawable_objects;
+    std::vector<Model *> models;
+    std::vector<DrawableObject *> drawable_objects;
     std::map<std::string, Shader *> shaders;
     std::shared_ptr<Rotation> rotation;
 };

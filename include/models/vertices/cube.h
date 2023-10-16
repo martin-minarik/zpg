@@ -1,5 +1,5 @@
-//3
-//glDrawArrays(GL_TRIANGLES, 0, 3);
+//36
+//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 const float cube[216] = {
         // Front side
@@ -37,7 +37,6 @@ const float cube[216] = {
         -0.5f, 0.5f, 0.5f, 1, 0, 0,
         -0.5f, 0.5f, -0.5f, 0, 1, 0,
         -0.5f, -0.5f, 0.5f, 0, 0, 1,
-
 
         // Top side
         -0.5f, 0.5f, -0.5f, 1, 0, 0,

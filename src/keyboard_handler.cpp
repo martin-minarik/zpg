@@ -15,22 +15,22 @@ void KeyBoardHandler::key_callback(GLFWwindow *window, int key, int scancode, in
     auto delta_time = Application::get_instance().get_delta_time();
     switch (key) {
         case GLFW_KEY_W:
-            if(camera)
+            if (camera)
                 camera->move_forward(delta_time);
             break;
 
         case GLFW_KEY_S:
-            if(camera)
+            if (camera)
                 camera->move_backward(delta_time);
             break;
 
         case GLFW_KEY_A:
-            if(camera)
+            if (camera)
                 camera->move_left(delta_time);
             break;
 
         case GLFW_KEY_D:
-            if(camera)
+            if (camera)
                 camera->move_right(delta_time);
             break;
     }

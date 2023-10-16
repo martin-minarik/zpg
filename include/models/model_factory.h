@@ -15,7 +15,7 @@
 
 class ModelFactory {
 public:
-    static Model *create_by_name(const std::string& name);
+    static Model *create_by_name(const std::string &name);
 
     static Model *create_triangle();
 
