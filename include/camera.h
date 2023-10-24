@@ -15,10 +15,10 @@
 #include "glm/gtc/matrix_transform.hpp" // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "glm/gtc/type_ptr.hpp" // glm::value_ptr
 
+#include "observable.h"
 
-class Shader;
 
-class Camera
+class Camera : public Observable<Camera>
 {
 public:
     Camera();
@@ -26,13 +26,6 @@ public:
     void calc_view_matrix();
 
     void calc_projection_matrix(float fov, float ratio, float near, float far);
-
-
-    void attach_shader(Shader *observer);
-
-    void detach_shader(Shader *observer);
-
-    void notify_shader();
 
     void process_mouse_movement(float diff_x, float diff_y, float delta_time);
 
@@ -51,7 +44,6 @@ private:
     float alpha = 0.f;
     float fi = 0.f;
     float mouse_speed = 20;
-    std::vector<Shader *> observers;
     glm::vec3 eye{0.f, 0.f, 5.f};
     glm::vec3 target{0.0f, 0.f, -1.f};
     glm::vec3 up{0.f, 1.f, 0.f};

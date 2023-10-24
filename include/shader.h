@@ -7,9 +7,11 @@
 //Include GLEW
 #include <GL/glew.h>
 
-class Camera;
+#include "observer.h"
+#include "camera.h"
 
-class Shader {
+class Shader : public Observer<Camera>
+{
 public:
     Shader(char *vertex_shader_str, char *fragment_shader_str);
 
@@ -21,7 +23,7 @@ public:
 
     void upload_transformation(TransformationComponent *transformationComponent) const;
 
-    void camera_update(Camera *camera) const;
+    void update(Camera *observable) override;
 
 private:
     void check_link_status() const;
