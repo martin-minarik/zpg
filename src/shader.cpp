@@ -56,6 +56,7 @@ void Shader::upload_transformation(TransformationComponent *transformationCompon
 
 void Shader::update(Camera *camera)
 {
+    this->use();
     this->upload_matrix("projection_matrix", camera->projection_matrix);
     this->upload_matrix("view_matrix", camera->view_matrix);
 }
