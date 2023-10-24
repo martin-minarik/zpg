@@ -13,7 +13,7 @@ public:
 
     virtual void apply() = 0;
 
-    const glm::mat4 &get_matrix() const;
+    [[nodiscard]] const glm::mat4 &get_matrix() const;
 
 protected:
     glm::mat4 matrix = glm::mat4{1.f};

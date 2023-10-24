@@ -8,8 +8,8 @@ const float &Rotation::get_angle() const {
     return angle;
 }
 
-void Rotation::set_angle(const float &angle) {
-    this->angle = angle;
+void Rotation::set_angle(const float &value) {
+    this->angle = value;
 }
 
 void Rotation::apply() {

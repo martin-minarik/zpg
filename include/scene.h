@@ -13,11 +13,6 @@
 #include "models/model_factory.h"
 #include "mouse_handler.h"
 
-#include "transformation/transformation_composite.h"
-#include "transformation/scale.h"
-#include "transformation/translation.h"
-#include "transformation/rotation.h"
-
 
 class Scene {
 public:

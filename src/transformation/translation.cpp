@@ -8,8 +8,8 @@ const glm::vec3 &Translation::get_vec() const {
     return vec;
 }
 
-void Translation::set_vec(const glm::vec3 &vec) {
-    Translation::vec = vec;
+void Translation::set_vec(const glm::vec3 &value) {
+    Translation::vec = value;
 }
 
 void Translation::apply() {

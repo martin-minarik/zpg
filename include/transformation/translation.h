@@ -15,12 +15,12 @@ public:
 
     void apply() override;
 
-    const glm::vec3 &get_vec() const;
+    [[nodiscard]] const glm::vec3 &get_vec() const;
 
-    void set_vec(const glm::vec3 &vec);
+    void set_vec(const glm::vec3 &value);
 
 private:
-    glm::vec3 vec;
+    glm::vec3 vec = {0, 0, 0};
 };
 
 

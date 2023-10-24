@@ -16,11 +16,11 @@ public:
 
     void apply() override;
 
-    const float &get_angle() const;
+    [[nodiscard]] const float &get_angle() const;
 
-    void set_angle(const float &angle);
+    void set_angle(const float &value);
 
 private:
-    float angle;
-    glm::vec3 axis;
+    float angle = 0;
+    glm::vec3 axis = {0, 0, 0};
 };
