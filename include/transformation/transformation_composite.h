@@ -12,16 +12,23 @@
 #include <memory>
 
 #include "transformation/transformation_component.h"
+#include "transformation/translation.h"
+#include "transformation/rotation.h"
+#include "transformation/scale.h"
 
 class TransformationComposite : public TransformationComponent {
 public:
     void apply() override;
 
-    void add(std::shared_ptr<TransformationComponent> component);
+    void add(const std::shared_ptr<TransformationComponent>& component);
+
+    void add_translation(glm::vec3 vec);
+    void add_rotation(float angle, glm::vec3 axis);
+    void add_scale(glm::vec3 vec);
 
     void remove(int index);
 
-    void remove(std::shared_ptr<TransformationComponent> component);
+    void remove(const std::shared_ptr<TransformationComponent>& component);
 
     void clear();
 

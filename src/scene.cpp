@@ -1,41 +1,34 @@
 #include "scene.h"
 
-Scene::Scene()
-{
+Scene::Scene() {
     init();
 }
 
-Scene::~Scene()
-{
+Scene::~Scene() {
     delete camera;
 
-    for (auto &drawable_object: drawable_objects)
-    {
+    for (auto &drawable_object: drawable_objects) {
         delete drawable_object;
     }
 
-    for (auto &model: models)
-    {
+    for (auto &model: models) {
         delete model;
     }
 
-    for (auto &item: shaders)
-    {
+    for (auto &item: shaders) {
         delete item.second;
         item.second = nullptr;
     }
 }
 
-void Scene::init()
-{
+void Scene::init() {
     this->init_shader();
     this->init_drawable_objects();
     this->init_camera();
     this->init_transformations();
 }
 
-void Scene::init_shader()
-{
+void Scene::init_shader() {
     char *vertex_shader =
             "#version 330\n"
             "layout(location=0) in vec3 vertex_position;"
@@ -73,8 +66,7 @@ void Scene::init_shader()
 
 }
 
-void Scene::init_drawable_objects()
-{
+void Scene::init_drawable_objects() {
     Model *cube_model = ModelFactory::create_by_name("cube");
     Model *sphere_model = ModelFactory::create_by_name("sphere");
     Model *suzie_flat = ModelFactory::create_by_name("suzie-flat");
@@ -93,60 +85,45 @@ void Scene::init_drawable_objects()
     drawable_objects.push_back(new DrawableObject(*suzie_flat, *shaders["vertex_color"]));
 }
 
-void Scene::init_transformations()
-{
+void Scene::init_transformations() {
     this->rotation.reset(new Rotation(0, glm::vec3(0, 1, 0)));
 
 
     drawable_objects[0]->transformation.add(rotation);
-    drawable_objects[0]->transformation.add(
-            std::make_shared<Rotation>(180, glm::vec3(0, 0, 1)));
-    drawable_objects[0]->transformation.add(
-            std::make_shared<Scale>(glm::vec3(0.3, 0.3, 0.3)));
+    drawable_objects[0]->transformation.add_rotation(180, glm::vec3(0, 0, 1));
+    drawable_objects[0]->transformation.add_scale(glm::vec3(0.3, 0.3, 0.3));
 
 
-    drawable_objects[1]->transformation.add(
-            std::make_shared<Translation>(glm::vec3(0, 0, -5)));
-    drawable_objects[1]->transformation.add(
-            std::make_shared<Rotation>(180, glm::vec3(0, 0, 1)));
+    drawable_objects[1]->transformation.add_translation(glm::vec3(0, 0, -5));
+    drawable_objects[1]->transformation.add_rotation(180, glm::vec3(0, 0, 1));
     drawable_objects[1]->transformation.add(rotation);
 
 
-    drawable_objects[2]->transformation.add(
-            std::make_shared<Translation>(glm::vec3(2, 2, -2)));
+    drawable_objects[2]->transformation.add_translation(glm::vec3(2, 2, -2));
 
 
-    drawable_objects[3]->transformation.add(
-            std::make_shared<Translation>(glm::vec3(-2, 2, -2)));
-    drawable_objects[3]->transformation.add(
-            std::make_shared<Scale>(glm::vec3(0.3)));
+    drawable_objects[3]->transformation.add_translation(glm::vec3(-2, 2, -2));
+    drawable_objects[3]->transformation.add_scale(glm::vec3(0.3));
 
 
-    drawable_objects[4]->transformation.add(
-            std::make_shared<Translation>(glm::vec3(2, -2, -2)));
+    drawable_objects[4]->transformation.add_translation(glm::vec3(2, -2, -2));
 
 
-    drawable_objects[5]->transformation.add(
-            std::make_shared<Translation>(glm::vec3(-2, -2, -2)));
+    drawable_objects[5]->transformation.add_translation(glm::vec3(-2, -2, -2));
 
 
-    drawable_objects[6]->transformation.add(
-            std::make_shared<Translation>(glm::vec3(0, 0, -2)));
-    drawable_objects[6]->transformation.add(
-            std::make_shared<Scale>(glm::vec3(0.3, 0.3, 0.3)));
+    drawable_objects[6]->transformation.add_translation(glm::vec3(0, 0, -2));
+    drawable_objects[6]->transformation.add_scale(glm::vec3(0.3, 0.3, 0.3));
 
-    for (auto &drawable_object: this->drawable_objects)
-    {
+    for (auto &drawable_object: this->drawable_objects) {
         drawable_object->transformation.apply();
     }
 }
 
-void Scene::init_camera()
-{
+void Scene::init_camera() {
     this->camera = new Camera();
 
-    for (auto &item: shaders)
-    {
+    for (auto &item: shaders) {
         this->camera->attach_observer(item.second);
     }
 
@@ -155,14 +132,12 @@ void Scene::init_camera()
     KeyBoardHandler::get_instance().set_camera(this->camera);
 }
 
-void Scene::draw()
-{
+void Scene::draw() {
     for (auto &drawable_object: drawable_objects)
         drawable_object->draw();
 }
 
-void Scene::update(float delta_time)
-{
+void Scene::update(float delta_time) {
     rotation->set_angle(rotation->get_angle() + 50 * delta_time);
     for (auto &drawable_object: this->drawable_objects)
         drawable_object->transformation.apply();
