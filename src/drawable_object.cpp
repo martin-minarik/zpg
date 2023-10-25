@@ -1,11 +1,11 @@
 #include "drawable_object.h"
 
-DrawableObject::DrawableObject(Model &model, Shader &shader) : model(model), shader(shader) {
+DrawableObject::DrawableObject(Model &model, Shader &shader) : Placeable(), model(model), shader(shader) {
 
 }
 
 void DrawableObject::draw() {
     shader.use();
-    shader.upload_transformation(reinterpret_cast<TransformationComponent *>(&this->transformation));
+    shader.upload_transformation(this->transformation_composite.get());
     model.draw();
 }

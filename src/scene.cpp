@@ -88,35 +88,34 @@ void Scene::init_drawable_objects() {
 void Scene::init_transformations() {
     this->rotation.reset(new Rotation(0, glm::vec3(0, 1, 0)));
 
-
-    drawable_objects[0]->transformation.add(rotation);
-    drawable_objects[0]->transformation.add_rotation(180, glm::vec3(0, 0, 1));
-    drawable_objects[0]->transformation.add_scale(glm::vec3(0.3, 0.3, 0.3));
-
-
-    drawable_objects[1]->transformation.add_translation(glm::vec3(0, 0, -5));
-    drawable_objects[1]->transformation.add_rotation(180, glm::vec3(0, 0, 1));
-    drawable_objects[1]->transformation.add(rotation);
+    drawable_objects[0]->add_transform(rotation, false);
+    drawable_objects[0]->set_rotation(180, glm::vec3(0, 0, 1), false);
+    drawable_objects[0]->set_scale(glm::vec3(0.3, 0.3, 0.3), false);
 
 
-    drawable_objects[2]->transformation.add_translation(glm::vec3(2, 2, -2));
+    drawable_objects[1]->set_translation(glm::vec3(0, 0, -5), false);
+    drawable_objects[1]->set_rotation(180, glm::vec3(0, 0, 1), false);
+    drawable_objects[1]->add_transform(rotation, false);
 
 
-    drawable_objects[3]->transformation.add_translation(glm::vec3(-2, 2, -2));
-    drawable_objects[3]->transformation.add_scale(glm::vec3(0.3));
+    drawable_objects[2]->set_translation(glm::vec3(2, 2, -2), false);
 
 
-    drawable_objects[4]->transformation.add_translation(glm::vec3(2, -2, -2));
+    drawable_objects[3]->set_translation(glm::vec3(-2, 2, -2), false);
+    drawable_objects[3]->set_scale(glm::vec3(0.3), false);
 
 
-    drawable_objects[5]->transformation.add_translation(glm::vec3(-2, -2, -2));
+    drawable_objects[4]->set_translation(glm::vec3(2, -2, -2), false);
 
 
-    drawable_objects[6]->transformation.add_translation(glm::vec3(0, 0, -2));
-    drawable_objects[6]->transformation.add_scale(glm::vec3(0.3, 0.3, 0.3));
+    drawable_objects[5]->set_translation(glm::vec3(-2, -2, -2), false);
 
+
+    drawable_objects[6]->set_translation(glm::vec3(0, 0, -2), false);
+    drawable_objects[6]->set_scale(glm::vec3(0.3, 0.3, 0.3), false);
+//
     for (auto &drawable_object: this->drawable_objects) {
-        drawable_object->transformation.apply();
+        drawable_object->apply_transform();
     }
 }
 
@@ -140,7 +139,7 @@ void Scene::draw() {
 void Scene::update(float delta_time) {
     rotation->set_angle(rotation->get_angle() + 50 * delta_time);
     for (auto &drawable_object: this->drawable_objects)
-        drawable_object->transformation.apply();
+        drawable_object->apply_transform();
 }
 
 

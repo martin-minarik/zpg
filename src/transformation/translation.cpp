@@ -1,6 +1,6 @@
 #include "transformation/translation.h"
 
-Translation::Translation(glm::vec3 vec) : vec(vec) {
+Translation::Translation(glm::vec3 vec) : TransformationComponent(), vec(vec) {
 
 }
 

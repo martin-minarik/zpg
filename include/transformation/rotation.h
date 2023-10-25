@@ -18,7 +18,12 @@ public:
 
     [[nodiscard]] const float &get_angle() const;
 
+    [[nodiscard]] const glm::vec3 &get_axis() const;
+
     void set_angle(const float &value);
+
+    void set_axis(const glm::vec3 &value);
+
 
 private:
     float angle = 0;
