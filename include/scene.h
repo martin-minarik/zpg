@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <string>
 
 // ZPG
 #include "shader.h"
@@ -36,7 +37,7 @@ private:
     void init_camera();
 
 
-    Camera *camera;
+    Camera *camera = nullptr;
     std::vector<Model *> models;
     std::vector<DrawableObject *> drawable_objects;
     std::map<std::string, Shader *> shaders;

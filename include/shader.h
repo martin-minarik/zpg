@@ -9,11 +9,12 @@
 
 #include "observer.h"
 #include "camera.h"
+#include "ShaderLoader.h"
 
-class Shader : public Observer<Camera>
+class Shader : private ShaderLoader, public Observer<Camera>
 {
 public:
-    Shader(char *vertex_shader_str, char *fragment_shader_str);
+    Shader(char *vertex_shader_filepath, char *fragment_shader_filepath);
 
     void use() const;
 
@@ -28,7 +29,5 @@ public:
 private:
     void check_link_status() const;
 
-    GLuint vertex_shader;
-    GLuint fragment_shader;
     GLuint shader_program;
 };

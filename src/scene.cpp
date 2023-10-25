@@ -29,40 +29,8 @@ void Scene::init() {
 }
 
 void Scene::init_shader() {
-    char *vertex_shader =
-            "#version 330\n"
-            "layout(location=0) in vec3 vertex_position;"
-            "layout(location=1) in vec3 vertex_color;"
-            "out vec3 color;"
-            "uniform mat4 model_matrix;"
-            "uniform mat4 view_matrix;"
-            "uniform mat4 projection_matrix;"
-            "void main () {"
-            //            "     gl_Position = model_matrix * vec4(vertex_position, 1);"
-            "     gl_Position = projection_matrix * view_matrix * model_matrix * vec4(vertex_position, 1);"
-            "     color  = vertex_color;"
-            "}";
-
-
-    char *fragment_shader_vertex =
-            "#version 330\n"
-            "out vec4 frag_colour;"
-            "in vec3 color;"
-            "void main () {"
-            "     frag_colour = vec4(color, 1);"
-            "}";
-
-    char *fragment_shader_green =
-            "#version 330\n"
-            "out vec4 frag_colour;"
-            "in vec3 color;"
-            "void main () {"
-            "     frag_colour = vec4 (0, 1.0, 0.0, 1.0);"
-            "}";
-
-    this->shaders["vertex_color"] = new Shader(vertex_shader, fragment_shader_vertex);
-    this->shaders["green"] = new Shader(vertex_shader, fragment_shader_green);
-
+    this->shaders["vertex_color"] = new Shader((char *) "resources\\shaders\\vertex.vert",
+                                               (char *) "resources\\shaders\\color.frag");
 
 }
 
@@ -121,14 +89,15 @@ void Scene::init_transformations() {
 
 void Scene::init_camera() {
     this->camera = new Camera();
+    if (camera) {
+        for (auto &item: shaders) {
+            this->camera->attach_observer(item.second);
+        }
 
-    for (auto &item: shaders) {
-        this->camera->attach_observer(item.second);
+        camera->notify_observers();
+        MouseHandler::get_instance().set_camera(this->camera);
+        KeyBoardHandler::get_instance().set_camera(this->camera);
     }
-
-    camera->notify_observers();
-    MouseHandler::get_instance().set_camera(this->camera);
-    KeyBoardHandler::get_instance().set_camera(this->camera);
 }
 
 void Scene::draw() {

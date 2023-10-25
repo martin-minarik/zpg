@@ -6,6 +6,7 @@ project(zpg_min0139)
 set(CMAKE_CXX_STANDARD 17)
 
 # Set aliases for paths
+set(RESOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)
 set(ZPG_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../libs)
 set(GLFW_DIR ${ZPG_LIBS}/glfw-3.3.8.bin.WIN64)
 set(GLEW_DIR ${ZPG_LIBS}/glew-2.1.0)
@@ -36,3 +37,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_gl_LIBRARY})
 file(COPY ${GLFW_DIR}/lib-mingw-w64/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR})
 # Copy glfw3.dll to cmake-build folder
 file(COPY ${GLEW_DIR}/bin/Release/x64/glew32.dll DESTINATION ${CMAKE_BINARY_DIR})
+# Copy resources
+file(COPY ${RESOURCES_DIR} DESTINATION ${CMAKE_BINARY_DIR})
