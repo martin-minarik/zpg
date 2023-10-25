@@ -1,5 +1,8 @@
 #include "application.h"
 
+//
+// Created by Martin Minarik
+//
 
 Application &Application::get_instance() {
     static Application instance;

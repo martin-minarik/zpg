@@ -1,5 +1,9 @@
 #include "mouse_handler.h"
 
+//
+// Created by Martin Minarik
+//
+
 MouseHandler &MouseHandler::get_instance() {
     static MouseHandler instance;
     return instance;

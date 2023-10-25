@@ -1,5 +1,11 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
+
+
 #include <GL/glew.h>
 
 #include <exception>

@@ -1,5 +1,11 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
+
+
 #include <string>
 #include <map>
 #include <stdexcept>

@@ -1,5 +1,9 @@
 #include "keyboard_handler.h"
 
+//
+// Created by Martin Minarik
+//
+
 KeyBoardHandler &KeyBoardHandler::get_instance() {
     static KeyBoardHandler instance;
     return instance;

@@ -1,5 +1,9 @@
 #include "transformation/placeable.h"
 
+//
+// Created by Martin Minarik
+//
+
 Placeable::Placeable() : transformation_composite(std::make_shared<TransformationComposite>()) {
     this->translation_component = this->transformation_composite->add_translation(glm::vec3{0, 0, 0});
     this->rotation_component = this->transformation_composite->add_rotation(0, glm::vec3{1, 1, 1});

@@ -1,6 +1,10 @@
 //36
 //glDrawArrays(GL_TRIANGLES, 0, 36);
 
+//
+// Created by Martin Minarik
+//
+
 const float cube[216] = {
         // Front side
         -0.5f, -0.5f, 0.5f, 1, 0, 0,

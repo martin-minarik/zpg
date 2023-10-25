@@ -1,5 +1,10 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
+
 #include <iostream>
 
 // Include Glew
@@ -20,6 +25,7 @@
 #include "keyboard_handler.h"
 
 class Scene;
+
 class Application {
 public:
     virtual ~Application();

@@ -1,5 +1,10 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
+
 // std
 #include <vector>
 #include <map>

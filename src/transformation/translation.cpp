@@ -1,5 +1,9 @@
 #include "transformation/translation.h"
 
+//
+// Created by Martin Minarik
+//
+
 Translation::Translation(glm::vec3 vec) : TransformationComponent(), vec(vec) {
 
 }

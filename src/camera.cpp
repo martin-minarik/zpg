@@ -1,5 +1,9 @@
 #include "camera.h"
 
+//
+// Created by Martin Minarik
+//
+
 Camera::Camera()
 {
     calc_view_matrix();

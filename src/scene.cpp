@@ -1,5 +1,9 @@
 #include "scene.h"
 
+//
+// Created by Martin Minarik
+//
+
 Scene::Scene() {
     init();
 }

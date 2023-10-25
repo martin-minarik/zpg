@@ -1,5 +1,9 @@
 #include "transformation/rotation.h"
 
+//
+// Created by Martin Minarik
+//
+
 Rotation::Rotation(float angle, glm::vec3 axis) : TransformationComponent(), angle(angle), axis(axis) {
 
 }

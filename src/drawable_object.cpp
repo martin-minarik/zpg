@@ -1,5 +1,9 @@
 #include "drawable_object.h"
 
+//
+// Created by Martin Minarik
+//
+
 DrawableObject::DrawableObject(Model &model, Shader &shader) : Placeable(), model(model), shader(shader) {
 
 }

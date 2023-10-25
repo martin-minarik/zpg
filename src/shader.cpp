@@ -1,5 +1,9 @@
 #include "shader.h"
 
+//
+// Created by Martin Minarik
+//
+
 Shader::Shader(char *vertex_shader_filepath, char *fragment_shader_filepath) {
     this->shader_program = this->loadShader(vertex_shader_filepath, fragment_shader_filepath);
 }

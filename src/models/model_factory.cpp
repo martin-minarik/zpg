@@ -1,5 +1,9 @@
 #include "models/model_factory.h"
 
+//
+// Created by Martin Minarik
+//
+
 Model *ModelFactory::create_by_name(const std::string &name) {
     if (name == "triangle") {
         return create_triangle();

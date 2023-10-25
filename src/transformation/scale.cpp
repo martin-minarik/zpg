@@ -1,5 +1,9 @@
 #include "transformation/scale.h"
 
+//
+// Created by Martin Minarik
+//
+
 Scale::Scale(glm::vec3 vec) : TransformationComponent(), vec(vec) {
 
 }

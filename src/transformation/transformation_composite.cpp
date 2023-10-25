@@ -1,6 +1,10 @@
 #include <algorithm>
 #include "transformation/transformation_composite.h"
 
+//
+// Created by Martin Minarik
+//
+
 void TransformationComposite::add(const std::shared_ptr<TransformationComponent> &component) {
     this->components.push_back(component);
 }

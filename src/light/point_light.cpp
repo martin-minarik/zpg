@@ -1,5 +1,9 @@
 #include "light/point_light.h"
 
+//
+// Created by Martin Minarik
+//
+
 void PointLight::set_translation(glm::vec3 value, bool apply) {
     Placeable::set_translation(value, apply);
     notify_observers();

@@ -9,6 +9,7 @@ void main () {
     // Constants
     vec4 object_color = vec4 (0.385, 0.647, 0.812, 1.0);
     vec4 ambient = vec4 (0.1, 0.1, 0.1, 1.0);
+
     // Direction
     vec3 light_direction = normalize(light_position - world_position);
 

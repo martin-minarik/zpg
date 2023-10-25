@@ -1,5 +1,9 @@
 #include "models/model.h"
 
+//
+// Created by Martin Minarik
+//
+
 Model::Model(const float *vertices, int size, int number_of_vertices) : number_of_vertices(number_of_vertices) {
     make_vbo(vertices, size);
     make_vao();

@@ -1,10 +1,15 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
 #include "transformation/transformation_composite.h"
 #include "transformation/scale.h"
 #include "transformation/translation.h"
 #include "transformation/rotation.h"
 #include <memory>
+
 
 class Placeable {
 public:
