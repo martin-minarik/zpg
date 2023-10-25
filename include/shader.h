@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "transformation/transformation_component.h"
 
 //Include GLEW
 #include <GL/glew.h>
@@ -10,8 +9,11 @@
 #include "observer.h"
 #include "camera.h"
 #include "ShaderLoader.h"
+#include "transformation/transformation_component.h"
+#include "light/point_light.h"
 
-class Shader : private ShaderLoader, public Observer<Camera>
+
+class Shader : private ShaderLoader, public Observer<Camera>, public Observer<PointLight>
 {
 public:
     Shader(char *vertex_shader_filepath, char *fragment_shader_filepath);
@@ -23,8 +25,12 @@ public:
     void upload_matrix(const char *name, const glm::mat4 &matrix) const;
 
     void upload_transformation(TransformationComponent *transformationComponent) const;
+    void upload_vec3(const char *name, const glm::vec3 &vec) const;
+    void upload_vec4(const char *name, const glm::vec4 &vec) const;
 
     void update(Camera *observable) override;
+
+    void update(PointLight *observable) override;
 
 private:
     void check_link_status() const;

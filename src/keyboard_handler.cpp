@@ -33,9 +33,28 @@ void KeyBoardHandler::key_callback(GLFWwindow *window, int key, int scancode, in
             if (camera)
                 camera->move_right(delta_time);
             break;
+
+        case GLFW_KEY_1:
+            if (scene)
+                scene->scene1();
+            break;
+
+        case GLFW_KEY_2:
+            if (scene)
+                scene->scene2();
+            break;
+
+        case GLFW_KEY_3:
+            if (scene)
+                scene->scene3();
+            break;
     }
 }
 
 void KeyBoardHandler::set_camera(Camera *camera) {
     KeyBoardHandler::camera = camera;
+}
+
+void KeyBoardHandler::set_scene(Scene *scene) {
+    KeyBoardHandler::scene = scene;
 }

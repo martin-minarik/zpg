@@ -40,10 +40,12 @@ public:
     glm::mat4 projection_matrix = glm::mat4{1.f};
     glm::mat4 view_matrix = glm::mat4{1.f};
 
+    const glm::vec3 &getEye() const;
+
 private:
     float alpha = 0.f;
     float fi = 0.f;
-    float mouse_speed = 20;
+    float mouse_speed = 30;
     glm::vec3 eye{0.f, 0.f, 5.f};
     glm::vec3 target{0.0f, 0.f, -1.f};
     glm::vec3 up{0.f, 1.f, 0.f};

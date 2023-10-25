@@ -66,5 +66,9 @@ void Camera::move_backward(float delta_time)
     notify_observers();
 }
 
+const glm::vec3 &Camera::getEye() const {
+    return eye;
+}
+
 
 

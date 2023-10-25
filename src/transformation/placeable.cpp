@@ -55,3 +55,7 @@ void Placeable::clear() {
     this->transformation_composite->add(rotation_component);
     this->transformation_composite->add(scale_component);
 }
+
+glm::vec3 Placeable::get_position() {
+    return this->translation_component->get_vec();
+}

@@ -31,6 +31,16 @@ void Shader::upload_matrix(const char *name, const glm::mat4 &matrix) const {
     glUniformMatrix4fv(variable, 1, GL_FALSE, &matrix[0][0]);
 }
 
+void Shader::upload_vec3(const char *name, const glm::vec3 &vec) const {
+    GLint variable = get_uniform_location(name);
+    glUniform3fv(variable, 1, &vec[0]);
+}
+
+void Shader::upload_vec4(const char *name, const glm::vec4 &vec) const {
+    GLint variable = get_uniform_location(name);
+    glUniform4fv(variable, 1, &vec[0]);
+}
+
 void Shader::upload_transformation(TransformationComponent *transformationComponent) const {
     this->upload_matrix("model_matrix", transformationComponent->get_matrix());
 }
@@ -39,6 +49,13 @@ void Shader::update(Camera *camera) {
     this->use();
     this->upload_matrix("projection_matrix", camera->projection_matrix);
     this->upload_matrix("view_matrix", camera->view_matrix);
+    this->upload_vec3("camera_position", camera->getEye());
+}
+
+void Shader::update(PointLight *light) {
+    this->use();
+    this->upload_vec3("light_position", light->get_position());
+    this->upload_vec3("light_color", light->getColor());
 }
 
 

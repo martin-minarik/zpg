@@ -10,11 +10,13 @@ class Placeable {
 public:
     Placeable();
 
-    void set_translation(glm::vec3 value, bool apply = true);
+    virtual void set_translation(glm::vec3 value, bool apply = true);
 
-    void set_rotation(float angle, glm::vec3 axis, bool apply = true);
+    virtual void set_rotation(float angle, glm::vec3 axis, bool apply = true);
 
-    void set_scale(glm::vec3 value, bool apply = true);
+    virtual void set_scale(glm::vec3 value, bool apply = true);
+
+    virtual glm::vec3 get_position();
 
     void add_transform(const std::shared_ptr<TransformationComponent> &component, bool apply = true);
 

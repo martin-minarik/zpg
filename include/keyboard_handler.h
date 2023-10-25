@@ -9,7 +9,9 @@
 
 #include "application.h"
 #include "camera.h"
+#include "scene.h"
 
+class Scene;
 class KeyBoardHandler {
 public:
 
@@ -23,8 +25,11 @@ public:
 
     void set_camera(Camera *camera);
 
+    void set_scene(Scene *scene);
+
 private:
     Camera *camera = nullptr;
+    Scene *scene = nullptr;
 
     KeyBoardHandler() = default;
 
