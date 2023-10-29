@@ -21,6 +21,7 @@
 
 // ZPG
 #include "scenes/scene_4_spheres.h"
+#include "scenes/scene_test_3.h"
 #include "scenes/scene_solar_system.h"
 #include "mouse_handler.h"
 #include "keyboard_handler.h"

@@ -45,7 +45,7 @@ void Application::init() {
     init_opengl();
     init_callbacks();
 
-    scene = new SceneSolarSystem();
+    scene = new SceneTest3();
     scene->init();
 }
 
