@@ -45,7 +45,7 @@ void Application::init() {
     init_opengl();
     init_callbacks();
 
-    scene = new Scene4Spheres();
+    scene = new SceneForest();
     scene->init();
 }
 

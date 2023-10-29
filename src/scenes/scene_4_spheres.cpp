@@ -25,11 +25,11 @@ void Scene4Spheres::init_materials() {
     this->materials["material3"] = new Material();
     this->materials["material4"] = new Material();
 
-    this->materials["material1"]->set_specular_power(2);
+    this->materials["material1"]->set_specular_power(32);
 
-    this->materials["material2"]->set_specular_power(5);
+    this->materials["material2"]->set_specular_power(32);
 
-    this->materials["material3"]->set_specular_power(16);
+    this->materials["material3"]->set_specular_power(32);
 
     this->materials["material4"]->set_specular_power(32);
 

@@ -52,7 +52,7 @@ Model *ModelFactory::create_cube() {
 }
 
 Model *ModelFactory::create_plain() {
-    return new Model(plain, 36);
+    return new Model(plain, 6);
 }
 
 Model *ModelFactory::create_sphere() {
