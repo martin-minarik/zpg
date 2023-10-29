@@ -20,11 +20,10 @@
 #include "glm/gtc/type_ptr.hpp" // glm::value_ptr
 
 // ZPG
-#include "scene.h"
+#include "scenes/scene_4_spheres.h"
+#include "scenes/scene_solar_system.h"
 #include "mouse_handler.h"
 #include "keyboard_handler.h"
-
-class Scene;
 
 class Application {
 public:

@@ -45,7 +45,8 @@ void Application::init() {
     init_opengl();
     init_callbacks();
 
-    scene = new Scene();
+    scene = new SceneSolarSystem();
+    scene->init();
 }
 
 void Application::init_opengl() {
@@ -58,7 +59,7 @@ void Application::init_opengl() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE,
-                   GLFW_OPENGL_CORE_PROFILE);  //*/
+                   GLFW_OPENGL_CORE_PROFILE);
 
     init_window();
 

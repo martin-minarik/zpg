@@ -15,10 +15,9 @@
 
 #include "application.h"
 #include "camera.h"
-#include "scene.h"
 #include "vector"
 
-class Scene;
+
 class KeyBoardHandler {
 public:
 
@@ -32,11 +31,9 @@ public:
 
     void set_camera(Camera *camera);
 
-    void set_scene(Scene *scene);
 
 private:
     Camera *camera = nullptr;
-    Scene *scene = nullptr;
     std::vector<int> pressed_keys;
 
     KeyBoardHandler() = default;

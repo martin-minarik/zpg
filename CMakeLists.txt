@@ -38,4 +38,4 @@ file(COPY ${GLFW_DIR}/lib-mingw-w64/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR})
 # Copy glfw3.dll to cmake-build folder
 file(COPY ${GLEW_DIR}/bin/Release/x64/glew32.dll DESTINATION ${CMAKE_BINARY_DIR})
 # Copy resources
-#file(COPY ${RESOURCES_DIR} DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY ${RESOURCES_DIR} DESTINATION ${CMAKE_BINARY_DIR})

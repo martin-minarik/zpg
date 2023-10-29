@@ -4,7 +4,6 @@
 // Created by Martin Minarik
 //
 
-
 // std
 #include <vector>
 #include <map>
@@ -17,8 +16,7 @@
 #include "light/point_light.h"
 #include "drawable_object.h"
 #include "models/model.h"
-#include "models/model_factory.h"
-#include "mouse_handler.h"
+
 
 class Scene {
 public:
@@ -26,22 +24,22 @@ public:
 
     virtual ~Scene();
 
-    void draw();
+    virtual void init();
 
-    void update(float delta_time);
+    virtual void draw();
 
-    void scene1();
-    void scene2();
-    void scene3();
+    virtual void update(float delta_time);
 
-private:
-    void init();
+protected:
+    virtual void init_shader() = 0;
 
-    void init_shader();
+    virtual void init_models() = 0;
 
-    void init_camera();
+    virtual void init_camera() = 0;
 
-    void init_models();
+    virtual void init_light() = 0;
+
+    virtual void init_drawable_objects() = 0;
 
     Camera *camera;
     PointLight *point_light;

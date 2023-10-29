@@ -20,18 +20,12 @@ void KeyBoardHandler::key_callback(GLFWwindow *window, int key, int scancode, in
     if (action == GLFW_PRESS) {
         switch (key) {
             case GLFW_KEY_1:
-                if (scene)
-                    scene->scene1();
                 break;
 
             case GLFW_KEY_2:
-                if (scene)
-                    scene->scene2();
                 break;
 
             case GLFW_KEY_3:
-                if (scene)
-                    scene->scene3();
                 break;
 
             default:
@@ -80,6 +74,3 @@ void KeyBoardHandler::set_camera(Camera *camera) {
     KeyBoardHandler::camera = camera;
 }
 
-void KeyBoardHandler::set_scene(Scene *scene) {
-    KeyBoardHandler::scene = scene;
-}
