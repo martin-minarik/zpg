@@ -25,6 +25,15 @@ Model *ModelFactory::create_by_name(const std::string &name) {
 
     } else if (name == "suzie-smooth") {
         return create_suzie(true);
+
+    } else if (name == "tree") {
+        return create_tree();
+
+    } else if (name == "bushes") {
+        return create_bushes();
+
+    } else if (name == "gift") {
+        return create_gift();
     }
 
     throw std::runtime_error("Model not found!");
@@ -57,6 +66,17 @@ Model *ModelFactory::create_suzie(bool smooth) {
     return new Model(suziFlat, 2904);
 }
 
+Model *ModelFactory::create_tree() {
+    return new Model(tree, 92814);
+}
+
+Model *ModelFactory::create_bushes() {
+    return new Model(bushes, 8730);
+}
+
+Model *ModelFactory::create_gift() {
+    return new Model(gift, 66624);
+}
 
 
 

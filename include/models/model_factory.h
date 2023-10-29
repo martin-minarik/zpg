@@ -18,6 +18,9 @@
 #include "models/vertices/sphere.h"
 #include "models/vertices/suzi_flat.h"
 #include "models/vertices/suzi_smooth.h"
+#include "models/vertices/tree.h"
+#include "models/vertices/bushes.h"
+#include "models/vertices/gift.h"
 
 class ModelFactory {
 public:
@@ -34,4 +37,11 @@ public:
     static Model *create_sphere();
 
     static Model *create_suzie(bool smooth);
+
+    static Model *create_tree();
+
+    static Model *create_gift();
+
+    static Model *create_bushes();
+
 };
