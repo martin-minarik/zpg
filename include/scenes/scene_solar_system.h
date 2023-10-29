@@ -30,5 +30,4 @@ private:
 private:
     std::shared_ptr<Rotation> sun_rotation;
     std::shared_ptr<Rotation> moon_rotation;
-
 };

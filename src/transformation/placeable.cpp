@@ -5,33 +5,8 @@
 //
 
 Placeable::Placeable() : transformation_composite(std::make_shared<TransformationComposite>()) {
-    this->translation_component = this->transformation_composite->add_translation(glm::vec3{0, 0, 0});
-    this->rotation_component = this->transformation_composite->add_rotation(0, glm::vec3{1, 1, 1});
-    this->scale_component = this->transformation_composite->add_scale(glm::vec3{1});
 }
 
-void Placeable::set_translation(glm::vec3 value, bool apply) {
-    translation_component->set_vec(value);
-    if (apply)
-        this->transformation_composite->apply();
-}
-
-void Placeable::set_rotation(float angle, glm::vec3 axis, bool apply) {
-    rotation_component->set_angle(angle);
-    rotation_component->set_axis(axis);
-
-    if (apply)
-        this->transformation_composite->apply();
-
-}
-
-void Placeable::set_scale(glm::vec3 value, bool apply) {
-    scale_component->set_vec(value);
-
-    if (apply)
-        this->transformation_composite->apply();
-
-}
 
 void Placeable::add_transform(const std::shared_ptr<TransformationComponent> &component, bool apply) {
     this->transformation_composite->add(component);
@@ -55,13 +30,6 @@ void Placeable::remove(const std::shared_ptr<TransformationComponent> &component
 
 void Placeable::clear() {
     this->transformation_composite->clear();
-    this->transformation_composite->add(translation_component);
-    this->transformation_composite->add(rotation_component);
-    this->transformation_composite->add(scale_component);
-}
-
-glm::vec3 Placeable::get_position() {
-    return this->translation_component->get_vec();
 }
 
 std::shared_ptr<TransformationComposite> Placeable::get_transformation_composite() {
@@ -69,19 +37,25 @@ std::shared_ptr<TransformationComposite> Placeable::get_transformation_composite
 }
 
 std::shared_ptr<Translation> Placeable::add_translation(glm::vec3 vec, bool apply) {
-    return this->transformation_composite->add_translation(vec);
+    auto item = this->transformation_composite->add_translation(vec);
     if (apply)
         this->transformation_composite->apply();
+
+    return item;
 }
 
 std::shared_ptr<Rotation> Placeable::add_rotation(float angle, glm::vec3 axis, bool apply) {
-    return this->transformation_composite->add_rotation(angle, axis);
+    auto item = this->transformation_composite->add_rotation(angle, axis);
     if (apply)
         this->transformation_composite->apply();
+
+    return item;
 }
 
 std::shared_ptr<Scale> Placeable::add_scale(glm::vec3 vec, bool apply) {
-    return this->transformation_composite->add_scale(vec);
+    auto item = this->transformation_composite->add_scale(vec);
     if (apply)
         this->transformation_composite->apply();
+
+    return item;
 }

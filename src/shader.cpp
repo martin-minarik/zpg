@@ -80,7 +80,7 @@ void Shader::update(Camera *camera) {
 void Shader::update(PointLight *light) {
     this->use();
     this->upload("light_position", light->get_position());
-    this->upload("light_color", light->getColor());
+    this->upload("light_color", light->get_color());
 }
 
 

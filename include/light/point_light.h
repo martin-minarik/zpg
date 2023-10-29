@@ -23,14 +23,19 @@
 #include "transformation/placeable.h"
 #include "observable.h"
 
-class PointLight : public Placeable, public Observable<PointLight> {
+class PointLight : public Observable<PointLight> {
 public:
-    void set_translation(glm::vec3 value, bool apply) override;
+    PointLight();
 
-    [[nodiscard]] const glm::vec3 &getColor() const;
+    const glm::vec3 &get_color() const;
 
-    void setColor(const glm::vec3 &color);
+    void set_color(const glm::vec3 &color);
+
+    const glm::vec3 &get_position() const;
+
+    void set_position(const glm::vec3 &position);
 
 private:
-    glm::vec3 color{0.7, 0.7, 0.7};
+    glm::vec3 color{1, 1, 1};
+    glm::vec3 position{0, 0, 0};
 };

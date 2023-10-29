@@ -44,7 +44,7 @@ void Scene4Spheres::init_light() {
         this->point_light->attach_observer(item.second);
     }
 
-    this->point_light->set_translation(glm::vec3{0.0, 0.0, -1.0}, true);
+    this->point_light->set_position(glm::vec3{0.0, 0.0, 0.0});
 }
 
 void Scene4Spheres::init_drawable_objects() {
@@ -53,10 +53,10 @@ void Scene4Spheres::init_drawable_objects() {
     drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
     drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
 
-    drawable_objects[0]->set_translation(glm::vec3(2, 0, 0), false);
-    drawable_objects[1]->set_translation(glm::vec3(-2, 0, 0), false);
-    drawable_objects[2]->set_translation(glm::vec3(0, 2, 0), false);
-    drawable_objects[3]->set_translation(glm::vec3(0, -2, 0), false);
+    drawable_objects[0]->add_translation(glm::vec3(2, 0, 0), false);
+    drawable_objects[1]->add_translation(glm::vec3(-2, 0, 0), false);
+    drawable_objects[2]->add_translation(glm::vec3(0, 2, 0), false);
+    drawable_objects[3]->add_translation(glm::vec3(0, -2, 0), false);
 
     for (auto &drawable_object: this->drawable_objects) {
         drawable_object->apply_transform();
