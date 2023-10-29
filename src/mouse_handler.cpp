@@ -13,6 +13,15 @@ void MouseHandler::init_callbacks(GLFWwindow *window) {
     glfwSetCursorPosCallback(window, [](GLFWwindow *window, double mouseXPos, double mouseYPos) -> void {
         MouseHandler::get_instance().cursor_pos_callback(window, mouseXPos, mouseYPos);
     });
+
+    glfwSetWindowSizeCallback(window, [](GLFWwindow *window, int width, int height)
+    {
+        auto ratio = (float) width / (float) height;
+        printf("%d x %d, %.3f\n", width, height, ratio);
+
+        glViewport(0, 0, width, height);
+        MouseHandler::get_instance().camera->calc_projection_matrix(60.f, ratio, 0.1f, 100.f);
+    });
 }
 
 void MouseHandler::cursor_pos_callback(GLFWwindow *window, double current_x, double current_y) {
