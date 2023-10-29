@@ -16,15 +16,15 @@ public:
 
     float get_ra() const;
 
-    void set_ra(float rA);
+    void set_ra(float ra);
 
     float get_rd() const;
 
-    void set_rd(float rD);
+    void set_rd(float rd);
 
     float get_rs() const;
 
-    void set_rs(float rS);
+    void set_rs(float rs);
 
     int get_specular_power() const;
 

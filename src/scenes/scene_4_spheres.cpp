@@ -14,12 +14,25 @@ void Scene4Spheres::init_shader() {
 
     this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                         (char *) "resources\\shaders\\phong.frag");
+
     this->shaders["blinn"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                         (char *) "resources\\shaders\\blinn.frag");
 }
 
 void Scene4Spheres::init_materials() {
-    this->materials["base_material"] = new Material();
+    this->materials["material1"] = new Material();
+    this->materials["material2"] = new Material();
+    this->materials["material3"] = new Material();
+    this->materials["material4"] = new Material();
+
+    this->materials["material1"]->set_specular_power(2);
+
+    this->materials["material2"]->set_specular_power(5);
+
+    this->materials["material3"]->set_specular_power(16);
+
+    this->materials["material4"]->set_specular_power(32);
+
 }
 
 void Scene4Spheres::init_camera() {
@@ -48,14 +61,14 @@ void Scene4Spheres::init_light() {
 }
 
 void Scene4Spheres::init_drawable_objects() {
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material1"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material2"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material3"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material4"]));
 
     drawable_objects[0]->add_translation(glm::vec3(2, 0, 0), false);
-    drawable_objects[1]->add_translation(glm::vec3(-2, 0, 0), false);
-    drawable_objects[2]->add_translation(glm::vec3(0, 2, 0), false);
+    drawable_objects[1]->add_translation(glm::vec3(0, 2, 0), false);
+    drawable_objects[2]->add_translation(glm::vec3(-2, 0, 0), false);
     drawable_objects[3]->add_translation(glm::vec3(0, -2, 0), false);
 
     for (auto &drawable_object: this->drawable_objects) {

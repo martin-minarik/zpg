@@ -9,24 +9,24 @@ float Material::get_ra() const {
     return r_a;
 }
 
-void Material::set_ra(float rA) {
-    r_a = rA;
+void Material::set_ra(float ra) {
+    r_a = ra;
 }
 
 float Material::get_rd() const {
     return r_d;
 }
 
-void Material::set_rd(float rD) {
-    r_d = rD;
+void Material::set_rd(float rd) {
+    r_d = rd;
 }
 
 float Material::get_rs() const {
     return r_s;
 
 }
-void Material::set_rs(float rS) {
-    r_s = rS;
+void Material::set_rs(float rs) {
+    r_s = rs;
 }
 
 int Material::get_specular_power() const {

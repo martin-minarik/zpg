@@ -7,12 +7,16 @@ out vec4 frag_colour;
 uniform vec3 camera_position;
 uniform vec3 light_position;
 uniform vec3 light_color;
+uniform  vec4 object_color;
+uniform int specular_power;
+uniform float r_a;
+uniform float r_d;
+uniform float r_s;
 
 void main ()
 {
     // Constants
-    vec4 object_color = vec4 (0.385, 0.647, 0.812, 1.0);
-    vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0);
+    vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0) * r_a;
 
     // Directions
     vec3 camera_direction = normalize(camera_position - world_position);
@@ -23,15 +27,14 @@ void main ()
 
     // Diffuse
     float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
-    vec4 diffuse = vec4 (diffuse_strength * light_color, 1);
+    vec4 diffuse = vec4 ((diffuse_strength * r_d) * light_color, 1);
 
     // Reflections
     float spec = max(dot(world_normal, halfway_direction), 0.0);
-    spec = pow(spec, 16);
-    vec4 specular =  spec * vec4 (light_color, 1.0);
+    spec = pow(spec, specular_power);
+    vec4 specular =  spec * r_s * vec4 (light_color, 1.0);
 
 
     // Final color
     frag_colour = (ambient + diffuse + specular) * object_color;
-//    frag_colour = vec4(1.0, 1.0, 1.0, 1.0);
 }
