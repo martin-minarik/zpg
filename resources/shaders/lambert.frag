@@ -14,9 +14,9 @@ void main () {
     vec3 light_direction = normalize(light_position - world_position);
 
     // Diffuse
-    float diff = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
-    vec4 diffuse = vec4 (diff * light_color, 1);
+    float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
+    vec4 diffuse = vec4 (diffuse_strength * light_color, 1);
 
     // Final color
-    frag_colour =(ambient + diffuse) * object_color;
+    frag_colour = (ambient + diffuse) * object_color;
 }

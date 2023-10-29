@@ -51,6 +51,8 @@ void Scene::init_shader() {
 
     this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                           (char *) "resources\\shaders\\phong.frag");
+    this->shaders["blinn"] = new Shader((char *) "resources\\shaders\\vertex.vert",
+                                        (char *) "resources\\shaders\\blinn.frag");
 
 }
 
@@ -89,10 +91,10 @@ void Scene::scene2() {
 
     printf("lambert\n");
 
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
 
     drawable_objects[0]->set_translation(glm::vec3(0, 2, -1), false);
     drawable_objects[1]->set_translation(glm::vec3(2, 0, -1), false);
@@ -112,10 +114,10 @@ void Scene::scene3() {
 
     this->point_light->set_translation(glm::vec3{0, 0, -1}, true);
     this->drawable_objects.clear();
-    drawable_objects.push_back(new DrawableObject(*models["suzie-smooth"], *shaders["lambert"]));
-    drawable_objects.push_back(new DrawableObject(*models["cube"], *shaders["constant"]));
-    drawable_objects.push_back(new DrawableObject(*models["suzie-flat"], *shaders["phong"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"]));
+    drawable_objects.push_back(new DrawableObject(*models["suzie-smooth"], *shaders["blinn"]));
+    drawable_objects.push_back(new DrawableObject(*models["cube"], *shaders["blinn"]));
+    drawable_objects.push_back(new DrawableObject(*models["suzie-flat"], *shaders["blinn"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
 
     drawable_objects[0]->set_translation(glm::vec3(0, 0.7, -2), false);
     drawable_objects[0]->set_scale(glm::vec3(0.7), false);
