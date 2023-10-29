@@ -28,13 +28,9 @@ void main ()
     vec4 diffuse = vec4 ((diffuse_strength * r_d) * light_color, 1);
 
     // Specular
-    vec4 specular = vec4(0.0f);
-
-    if (diffuse_strength != 0)
-    { float spec = max(dot(camera_direction, reflection_direction), 0.0);
-        spec = pow(spec, specular_power);
-        vec4 specular =  spec * r_s * vec4 (light_color, 1.0);
-    }
+    float spec = max(dot(camera_direction, reflection_direction), 0.0);
+    spec = pow(spec, specular_power);
+    vec4 specular =  spec * r_s * vec4 (light_color, 1.0);
 
 
     // Final color

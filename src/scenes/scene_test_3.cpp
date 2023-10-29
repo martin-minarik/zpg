@@ -6,20 +6,15 @@
 
 
 void SceneTest3::init_shader() {
-    this->shaders["constant"] = new Shader((char *) "resources\\shaders\\vertex.vert",
-                                           (char *) "resources\\shaders\\constant.frag");
-
-    this->shaders["lambert"] = new Shader((char *) "resources\\shaders\\vertex.vert",
-                                          (char *) "resources\\shaders\\lambert.frag");
-
     this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                         (char *) "resources\\shaders\\phong.frag");
-    this->shaders["blinn"] = new Shader((char *) "resources\\shaders\\vertex.vert",
-                                        (char *) "resources\\shaders\\blinn.frag");
+    this->shaders["phong2"] = new Shader((char *) "resources\\shaders\\vertex.vert",
+                                        (char *) "resources\\shaders\\phong2.frag");
 }
 
 void SceneTest3::init_materials() {
     this->materials["base_material"] = new Material();
+    this->materials["base_material"]->set_specular_power(1.0);
 }
 
 void SceneTest3::init_camera() {
