@@ -13,13 +13,15 @@
 #include "shader.h"
 #include "models/model.h"
 #include "transformation/placeable.h"
+#include "material/material.h"
 
 class DrawableObject : public Placeable{
 public:
-    explicit DrawableObject(Model &model, Shader &shader);
+    explicit DrawableObject(Model &model, Shader &shader, Material &material);
     void draw();
 
 private:
     Shader &shader;
     Model &model;
+    Material &material;
 };

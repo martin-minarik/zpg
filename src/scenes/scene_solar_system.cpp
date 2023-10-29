@@ -35,6 +35,13 @@ void SceneSolarSystem::init_models() {
     this->models["cube"] = ModelFactory::create_by_name("cube");
 }
 
+void SceneSolarSystem::init_materials() {
+    this->materials["sun_material"] = new Material(glm::vec4{1, 0.6, 0, 1});
+    this->materials["mercury"] = new Material(glm::vec4{1, 0.7, 0.5, 1});
+    this->materials["earth"] = new Material(glm::vec4{0, 0.7, 1, 1});
+    this->materials["moon"] = new Material(glm::vec4{0.8, 0.8, 0.8, 1});
+}
+
 void SceneSolarSystem::init_light() {
     this->point_light = new PointLight();
 
@@ -46,23 +53,42 @@ void SceneSolarSystem::init_light() {
 }
 
 void SceneSolarSystem::init_drawable_objects() {
-    auto *sun = new DrawableObject(*models["sphere"], *shaders["blinn"]);
-    auto *mercury = new DrawableObject(*models["sphere"], *shaders["blinn"]);
-    auto *mercury_moon = new DrawableObject(*models["sphere"], *shaders["blinn"]);
-
-
+    auto *sun = new DrawableObject(*models["sphere"], *shaders["constant"], *materials["sun_material"]);
+    auto *mercury = new DrawableObject(*models["sphere"], *shaders["constant"], *materials["mercury"]);
+    auto *mercury_moon = new DrawableObject(*models["suzie-flat"], *shaders["constant"], *materials["mercury"]);
 
     drawable_objects.push_back(sun);
     drawable_objects.push_back(mercury);
     drawable_objects.push_back(mercury_moon);
 
+    sun_rotation = std::make_shared<Rotation>(0, glm::vec3{0, 0, 1});
+    moon_rotation = std::make_shared<Rotation>(0, glm::vec3{0, 0, 1});
+
+
+
     sun->set_translation(glm::vec3(0, 0, 0), false);
-    mercury->set_translation(glm::vec3(0, 0, -2), false);
-    mercury->set_scale(glm::vec3(0.2), false);
-    mercury_moon->set_translation(glm::vec3(0, 0, -2.5), false);
+    sun->set_scale(glm::vec3(0.4), false);
+    sun->add_transform(sun_rotation, false);
+
+
+//    mercury->set_translation(glm::vec3(0, -2, 0), false);
+//    mercury->set_scale(glm::vec3(0.2), false);
+    mercury->add_transform(sun_rotation, false);
+    mercury->add_translation(glm::vec3(0, -2, 0), false);
+    mercury->add_scale(glm::vec3(0.2), false);
+
+
+
+    mercury_moon->set_translation(glm::vec3(0, -2.5, 0), false);
     mercury_moon->set_scale(glm::vec3(0.07), false);
 
+    for (auto &drawable_object: this->drawable_objects) {
+        drawable_object->apply_transform();
+    }
+}
 
+void SceneSolarSystem::update(float delta_time) {
+    sun_rotation->set_angle(sun_rotation->get_angle() + 20 * delta_time);
     for (auto &drawable_object: this->drawable_objects) {
         drawable_object->apply_transform();
     }

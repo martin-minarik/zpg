@@ -21,6 +21,12 @@ Scene::~Scene() {
         delete item.second;
         item.second = nullptr;
     }
+
+    for (auto &item: materials) {
+        delete item.second;
+        item.second = nullptr;
+    }
+
     if (camera)
         delete camera;
 
@@ -31,6 +37,7 @@ Scene::~Scene() {
 void Scene::init() {
     this->init_shader();
     this->init_models();
+    this->init_materials();
     this->init_camera();
     this->init_light();
     this->init_drawable_objects();

@@ -63,3 +63,25 @@ void Placeable::clear() {
 glm::vec3 Placeable::get_position() {
     return this->translation_component->get_vec();
 }
+
+std::shared_ptr<TransformationComposite> Placeable::get_transformation_composite() {
+    return this->transformation_composite;
+}
+
+std::shared_ptr<Translation> Placeable::add_translation(glm::vec3 vec, bool apply) {
+    return this->transformation_composite->add_translation(vec);
+    if (apply)
+        this->transformation_composite->apply();
+}
+
+std::shared_ptr<Rotation> Placeable::add_rotation(float angle, glm::vec3 axis, bool apply) {
+    return this->transformation_composite->add_rotation(angle, axis);
+    if (apply)
+        this->transformation_composite->apply();
+}
+
+std::shared_ptr<Scale> Placeable::add_scale(glm::vec3 vec, bool apply) {
+    return this->transformation_composite->add_scale(vec);
+    if (apply)
+        this->transformation_composite->apply();
+}

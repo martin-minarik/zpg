@@ -15,6 +15,9 @@ private:
 
     void init_models() override;
 
+protected:
+    void init_materials() override;
+
     void init_camera() override;
 
     void init_light() override;

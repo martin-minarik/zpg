@@ -35,6 +35,8 @@ protected:
 
     virtual void init_models() = 0;
 
+    virtual void init_materials() = 0;
+
     virtual void init_camera() = 0;
 
     virtual void init_light() = 0;
@@ -44,6 +46,7 @@ protected:
     Camera *camera;
     PointLight *point_light;
     std::map<std::string, Model *> models;
+    std::map<std::string, Material *> materials;
     std::vector<DrawableObject *> drawable_objects;
     std::map<std::string, Shader *> shaders;
 };

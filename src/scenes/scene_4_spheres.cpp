@@ -18,6 +18,10 @@ void Scene4Spheres::init_shader() {
                                         (char *) "resources\\shaders\\blinn.frag");
 }
 
+void Scene4Spheres::init_materials() {
+    this->materials["base_material"] = new Material();
+}
+
 void Scene4Spheres::init_camera() {
     this->camera = new Camera();
     for (auto &item: shaders) {
@@ -31,9 +35,6 @@ void Scene4Spheres::init_camera() {
 
 void Scene4Spheres::init_models() {
     this->models["sphere"] = ModelFactory::create_by_name("sphere");
-    this->models["suzie-flat"] = ModelFactory::create_by_name("suzie-flat");
-    this->models["suzie-smooth"] = ModelFactory::create_by_name("suzie-smooth");
-    this->models["cube"] = ModelFactory::create_by_name("cube");
 }
 
 void Scene4Spheres::init_light() {
@@ -47,10 +48,10 @@ void Scene4Spheres::init_light() {
 }
 
 void Scene4Spheres::init_drawable_objects() {
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["base_material"]));
 
     drawable_objects[0]->set_translation(glm::vec3(2, 0, 0), false);
     drawable_objects[1]->set_translation(glm::vec3(-2, 0, 0), false);
@@ -61,4 +62,6 @@ void Scene4Spheres::init_drawable_objects() {
         drawable_object->apply_transform();
     }
 }
+
+
 
