@@ -73,7 +73,6 @@ void KeyBoardHandler::key_callback(GLFWwindow *window, int key, int scancode, in
                     break;
             }
         }
-
     }
 }
 

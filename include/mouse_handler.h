@@ -27,6 +27,7 @@ public:
     void set_camera(Camera *camera);
 
 private:
+    std::vector<int> pressed_buttons;
     bool first_move = true;
     double last_x = 0;
     double last_y = 0;
@@ -35,5 +36,7 @@ private:
     MouseHandler() = default;
 
     void cursor_pos_callback(GLFWwindow *window, double current_x, double current_y);
+
+    void mouse_button_callback(GLFWwindow *window, int button, int action, int mode);
 };
 

@@ -9,13 +9,20 @@ MouseHandler &MouseHandler::get_instance() {
     return instance;
 }
 
+void MouseHandler::set_camera(Camera *camera) {
+    MouseHandler::camera = camera;
+}
+
 void MouseHandler::init_callbacks(GLFWwindow *window) {
     glfwSetCursorPosCallback(window, [](GLFWwindow *window, double mouseXPos, double mouseYPos) -> void {
         MouseHandler::get_instance().cursor_pos_callback(window, mouseXPos, mouseYPos);
     });
 
-    glfwSetWindowSizeCallback(window, [](GLFWwindow *window, int width, int height)
-    {
+    glfwSetMouseButtonCallback(window, [](GLFWwindow *window, int button, int action, int mode) -> void {
+        MouseHandler::get_instance().mouse_button_callback(window, button, action, mode);
+    });
+
+    glfwSetWindowSizeCallback(window, [](GLFWwindow *window, int width, int height) {
         auto ratio = (float) width / (float) height;
         printf("%d x %d, %.3f\n", width, height, ratio);
 
@@ -38,10 +45,23 @@ void MouseHandler::cursor_pos_callback(GLFWwindow *window, double current_x, dou
         last_y = current_y;
 
         if (camera)
-            camera->process_mouse_movement(x_diff, y_diff, delta_time);
+            if (std::find(pressed_buttons.begin(), pressed_buttons.end(), GLFW_MOUSE_BUTTON_2)
+                != pressed_buttons.end()) {
+                camera->process_mouse_movement(x_diff, y_diff, delta_time);
+            }
     }
 }
 
-void MouseHandler::set_camera(Camera *camera) {
-    MouseHandler::camera = camera;
+void MouseHandler::mouse_button_callback(GLFWwindow *window, int button, int action, int mode) {
+    if (action == GLFW_PRESS) {
+        pressed_buttons.push_back(button);
+
+    } else if (action == GLFW_RELEASE) {
+        pressed_buttons.erase(std::remove(pressed_buttons.begin(),
+                                          pressed_buttons.end(),
+                                          button),
+                              pressed_buttons.end());
+    }
+
+
 }
