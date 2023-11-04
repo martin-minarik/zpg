@@ -28,9 +28,6 @@ public:
 
 private:
     std::vector<int> pressed_buttons;
-    bool first_move = true;
-    double last_x = 0;
-    double last_y = 0;
     Camera *camera = nullptr;
 
     MouseHandler() = default;

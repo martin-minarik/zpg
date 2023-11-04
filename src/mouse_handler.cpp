@@ -32,24 +32,21 @@ void MouseHandler::init_callbacks(GLFWwindow *window) {
 }
 
 void MouseHandler::cursor_pos_callback(GLFWwindow *window, double current_x, double current_y) {
-    if (this->first_move) {
-        last_x = current_x;
-        last_y = current_y;
-        first_move = false;
-    } else {
-        float x_diff = current_x - last_x;
-        float y_diff = current_y - last_y;
-        auto delta_time = Application::get_instance().get_delta_time();
+    static double last_x = current_x;
+    static double last_y = current_y;
+    float x_diff = current_x - last_x;
+    float y_diff = current_y - last_y;
+    auto delta_time = Application::get_instance().get_delta_time();
 
-        last_x = current_x;
-        last_y = current_y;
+    last_x = current_x;
+    last_y = current_y;
 
-        if (camera)
-            if (std::find(pressed_buttons.begin(), pressed_buttons.end(), GLFW_MOUSE_BUTTON_2)
-                != pressed_buttons.end()) {
-                camera->process_mouse_movement(x_diff, y_diff, delta_time);
-            }
-    }
+    if (camera)
+        if (std::find(pressed_buttons.begin(), pressed_buttons.end(), GLFW_MOUSE_BUTTON_2)
+            != pressed_buttons.end()) {
+            camera->process_mouse_movement(x_diff, y_diff, delta_time);
+        }
+//    }
 }
 
 void MouseHandler::mouse_button_callback(GLFWwindow *window, int button, int action, int mode) {
