@@ -20,12 +20,19 @@ void KeyBoardHandler::key_callback(GLFWwindow *window, int key, int scancode, in
     if (action == GLFW_PRESS) {
         switch (key) {
             case GLFW_KEY_1:
+                Application::get_instance().set_scene(new Scene4Spheres());
                 break;
 
             case GLFW_KEY_2:
+                Application::get_instance().set_scene(new SceneSolarSystem());
                 break;
 
             case GLFW_KEY_3:
+                Application::get_instance().set_scene(new SceneTest3());
+                break;
+
+            case GLFW_KEY_4:
+                Application::get_instance().set_scene(new SceneForest());
                 break;
 
             default:

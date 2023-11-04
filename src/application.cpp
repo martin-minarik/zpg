@@ -14,7 +14,6 @@ Application::~Application() {
 }
 
 void Application::run() {
-    init();
     loop();
 }
 
@@ -44,9 +43,6 @@ void Application::loop() {
 void Application::init() {
     init_opengl();
     init_callbacks();
-
-    scene = new SceneForest();
-    scene->init();
 }
 
 void Application::init_opengl() {
@@ -116,6 +112,13 @@ GLFWwindow *Application::get_window() const {
 
 float Application::get_delta_time() const {
     return delta_time;
+}
+
+void Application::set_scene(Scene *scene_) {
+    if(this->scene)
+        delete scene;
+    this->scene = scene_;
+    this->scene->init();
 }
 
 

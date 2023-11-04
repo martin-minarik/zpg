@@ -14,6 +14,11 @@
 #include "GLFW/glfw3.h"
 
 #include "application.h"
+#include "scenes/scene_4_spheres.h"
+#include "scenes/scene_forest.h"
+#include "scenes/scene_test_3.h"
+#include "scenes/scene_solar_system.h"
+
 #include "camera.h"
 #include "vector"
 

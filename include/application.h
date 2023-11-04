@@ -37,18 +37,20 @@ public:
 
     Application &operator=(const Application &) = delete;
 
+    void init();
+
     void run();
 
     [[nodiscard]] GLFWwindow *get_window() const;
 
-    float get_delta_time() const;
+    [[nodiscard]] float get_delta_time() const;
+
+    void set_scene(Scene * scene_);
 
 private:
     Application() = default;
 
     void loop();
-
-    void init();
 
     void init_opengl();
 
