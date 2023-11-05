@@ -10,7 +10,8 @@ uniform mat4 view_matrix;
 uniform mat4 projection_matrix;
 
 void main() {
-    world_position = vec3(model_matrix * vec4(vertex_position, 1.0));
+    vec4 v4_world_position = model_matrix * vec4(vertex_position, 1.0);
+    world_position = v4_world_position.xyz / v4_world_position.w;
     world_normal = normalize(transpose(inverse(mat3(model_matrix))) * vertex_normal);
 
     gl_Position = projection_matrix * view_matrix * model_matrix * vec4(vertex_position, 1);

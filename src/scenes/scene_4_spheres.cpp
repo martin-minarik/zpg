@@ -25,7 +25,7 @@ void Scene4Spheres::init_materials() {
     this->materials["material3"] = new Material();
     this->materials["material4"] = new Material();
 
-    this->materials["material1"]->set_specular_power(32);
+    this->materials["material1"]->set_specular_power(100);
 
     this->materials["material2"]->set_specular_power(32);
 
@@ -61,10 +61,10 @@ void Scene4Spheres::init_light() {
 }
 
 void Scene4Spheres::init_drawable_objects() {
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material1"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material2"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material3"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material4"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material1"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material2"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material3"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material4"]));
 
     drawable_objects[0]->add_translation(glm::vec3(2, 0, 0), false);
     drawable_objects[1]->add_translation(glm::vec3(0, 2, 0), false);

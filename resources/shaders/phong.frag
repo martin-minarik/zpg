@@ -30,10 +30,10 @@ void main ()
     // Specular
     vec4 specular = vec4(0.0f);
 
-    if (diffuse_strength != 0)
+//    if (diffuse_strength != 0)
     { float spec = max(dot(camera_direction, reflection_direction), 0.0);
         spec = pow(spec, specular_power);
-        vec4 specular =  spec * r_s * vec4 (light_color, 1.0);
+        specular =  spec * r_s * vec4 (light_color, 1.0);
     }
 
 
