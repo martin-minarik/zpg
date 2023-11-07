@@ -23,6 +23,12 @@
 #include "transformation/placeable.h"
 #include "observable.h"
 
+struct Attenuation {
+    float k_constant;
+    float k_linear;
+    float k_quadratic;
+};
+
 class PointLight : public Observable<PointLight> {
 public:
     PointLight();
@@ -35,7 +41,12 @@ public:
 
     void set_position(const glm::vec3 &position);
 
+    [[nodiscard]] const Attenuation &get_attenuation() const;
+
+    [[maybe_unused]] void set_attenuation(const Attenuation &attenuation_);
+
 private:
     glm::vec3 color{1, 1, 1};
     glm::vec3 position{0, 0, 0};
+    Attenuation attenuation = {1, 0.1, 1};
 };

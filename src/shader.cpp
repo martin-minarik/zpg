@@ -85,6 +85,10 @@ void Shader::update(PointLight *light) {
     this->use();
     this->upload("light_position", light->get_position());
     this->upload("light_color", light->get_color());
+    const Attenuation &attenuation = light->get_attenuation();
+    this->upload("light_k_constant", attenuation.k_constant);
+    this->upload("light_k_linear", attenuation.k_linear);
+    this->upload("light_k_quadratic", attenuation.k_quadratic);
 }
 
 
