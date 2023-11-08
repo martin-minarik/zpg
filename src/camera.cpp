@@ -69,8 +69,7 @@ const glm::vec3 &Camera::get_eye() const {
 
 void Camera::set_eye(const glm::vec3 &eye) {
     Camera::eye = eye;
-//    if(spotlight)
-//        spotlight->set_position(eye);
+    calc_view_matrix();
 }
 
 const glm::vec3 &Camera::get_target() const {
@@ -79,21 +78,8 @@ const glm::vec3 &Camera::get_target() const {
 
 void Camera::set_target(const glm::vec3 &target) {
     Camera::target = target;
-//    if(spotlight)
-//        spotlight->set_direction(target);
+    calc_view_matrix();
 }
-
-
-//void Camera::attach_spotlight(Spotlight *spotlight) {
-//    this->spotlight = spotlight;
-//}
-//
-//void Camera::detach_spotlight() {
-//    this->spotlight = nullptr;
-//}
-
-
-
 
 
 

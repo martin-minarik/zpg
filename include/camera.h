@@ -53,10 +53,6 @@ public:
 
     void set_target(const glm::vec3 &target);
 
-//    void attach_spotlight(Spotlight *spotlight);
-//    void detach_spotlight();
-
-
 
 private:
     float alpha = 0.f;
@@ -65,5 +61,4 @@ private:
     glm::vec3 eye{0.f, 0.f, 5.f};
     glm::vec3 target{0.0f, 0.f, -1.f};
     glm::vec3 up{0.f, 1.f, 0.f};
-//    Spotlight *spotlight = nullptr;
 };
