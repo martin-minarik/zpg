@@ -1,8 +1,8 @@
+#include "scenes/scene_test_3.h"
+
 //
 // Created by Martin Minarik
 //
-
-#include "scenes/scene_test_3.h"
 
 
 void SceneTest3::init_shader() {

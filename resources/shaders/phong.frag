@@ -1,4 +1,9 @@
 # version 400
+
+//
+// Created by Martin Minarik
+//
+
 #define MAX_N_LIGHTS 10
 
 out vec4 frag_colour;

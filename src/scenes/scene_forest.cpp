@@ -1,5 +1,8 @@
 #include "scenes/scene_forest.h"
 
+//
+// Created by Martin Minarik
+//
 
 void SceneForest::init_shader() {
     this->shaders["constant"] = new Shader((char *) "resources\\shaders\\vertex.vert",
@@ -60,7 +63,6 @@ void SceneForest::init_light() {
         light->set_direction(glm::vec3{-1.0, 1.0, 1.0});
         this->lights.push_back(light);
     }
-
 
 
     for (auto &item: shaders) {

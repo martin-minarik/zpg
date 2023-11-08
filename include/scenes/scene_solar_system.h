@@ -1,8 +1,8 @@
+#pragma once
+
 //
 // Created by Martin Minarik
 //
-
-#pragma once
 
 #include "scenes/scene.h"
 #include "models/model_factory.h"

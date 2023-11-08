@@ -4,7 +4,6 @@
 // Created by Martin Minarik
 //
 
-
 PointLight::PointLight(int id) : Light(id) {}
 
 

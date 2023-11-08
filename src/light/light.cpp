@@ -1,5 +1,9 @@
 #include "light/light.h"
 
+//
+// Created by Martin Minarik
+//
+
 Light::Light(int id) : id(id) {}
 
 const glm::vec3 &Light::get_color() const {

@@ -1,5 +1,9 @@
 #include "light/spotlight.h"
 
+//
+// Created by Martin Minarik
+//
+
 Spotlight::Spotlight(int id) : Light(id) {
 
 }

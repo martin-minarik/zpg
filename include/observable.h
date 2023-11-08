@@ -1,11 +1,14 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
 #include <vector>
 #include <algorithm>
 
 #include "observer.h"
 
-// From: https://www.codeproject.com/Articles/3267/Implementing-a-Subject-Observer-Pattern-with-Templ
 
 template<class T>
 class Observable {

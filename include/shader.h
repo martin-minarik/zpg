@@ -1,8 +1,8 @@
+#pragma once
+
 //
 // Created by Martin Minarik
 //
-
-#pragma once
 
 #include <iostream>
 

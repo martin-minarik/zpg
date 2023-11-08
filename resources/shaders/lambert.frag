@@ -1,4 +1,9 @@
 #version 400
+
+//
+// Created by Martin Minarik
+//
+
 #define MAX_N_LIGHTS 10
 in vec3 world_position;
 in vec3 world_normal;

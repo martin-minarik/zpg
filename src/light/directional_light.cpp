@@ -1,5 +1,9 @@
 #include "light/directional_light.h"
 
+//
+// Created by Martin Minarik
+//
+
 DirectionalLight::DirectionalLight(int id) : Light(id) {
 
 }

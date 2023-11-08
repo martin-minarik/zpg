@@ -1,9 +1,8 @@
+#include "scenes/scene_4_spheres.h"
+
 //
 // Created by Martin Minarik
 //
-
-#include "scenes/scene_4_spheres.h"
-
 
 void Scene4Spheres::init_shader() {
     this->shaders["constant"] = new Shader((char *) "resources\\shaders\\vertex.vert",

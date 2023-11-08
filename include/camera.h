@@ -4,8 +4,6 @@
 // Created by Martin Minarik
 //
 
-
-
 #include <vector>
 #include <algorithm>
 

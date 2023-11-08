@@ -1,8 +1,8 @@
+#include "scenes/scene_solar_system.h"
+
 //
 // Created by Martin Minarik
 //
-
-#include "scenes/scene_solar_system.h"
 
 void SceneSolarSystem::init_shader() {
     this->shaders["constant"] = new Shader((char *) "resources\\shaders\\vertex.vert",

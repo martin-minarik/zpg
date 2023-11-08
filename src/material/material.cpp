@@ -1,5 +1,9 @@
 #include "material/material.h"
 
+//
+// Created by Martin Minarik
+//
+
 Material::Material() {}
 
 Material::Material(const glm::vec4 &color) : color(color) {}

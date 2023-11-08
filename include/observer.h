@@ -1,6 +1,9 @@
 #pragma once
 
-// From: https://www.codeproject.com/Articles/3267/Implementing-a-Subject-Observer-Pattern-with-Templ
+//
+// Created by Martin Minarik
+//
+
 template<class T>
 class Observer {
 public:
