@@ -37,7 +37,7 @@ public:
     void update(Camera *camera) override;
 
 private:
-    glm::vec3 position{1, 0, 0};
+    glm::vec3 position{0, 0, 2};
     glm::vec3 direction{0,0,-1};
     float cut_off = glm::cos(glm::radians(12.5f));
     Attenuation attenuation = {1, 0, 0};

@@ -44,12 +44,10 @@ void SceneSolarSystem::init_materials() {
 
 void SceneSolarSystem::init_light() {
     {
-        PointLight *light = new PointLight(0);
+        auto *light = new PointLight(this->lights.size());
         light->set_position(glm::vec3{0.0, 0.0, 0.0});
         this->lights.push_back(light);
     }
-
-
 
     for (auto &item: shaders) {
         for (auto &light: lights) {

@@ -68,6 +68,7 @@ void Shader::upload_transformation(TransformationComponent *transformationCompon
 void Shader::upload_material(Material *material) const {
     this->use();
     this->upload("object_color", material->get_color());
+    this->upload("ambient_color", material->get_ambient_color());
     this->upload("r_a", material->get_ra());
     this->upload("r_d", material->get_rd());
     this->upload("r_s", material->get_rs());

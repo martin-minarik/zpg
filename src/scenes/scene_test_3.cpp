@@ -32,8 +32,8 @@ void SceneTest3::init_models() {
 
 void SceneTest3::init_light() {
     {
-        PointLight *light = new PointLight(0);
-        light->set_position(glm::vec3{0.0, 0.0, 0.0});
+        auto *light = new PointLight(0);
+        light->set_position(glm::vec3{0.0, 0.0, -3.0});
         this->lights.push_back(light);
     }
 
