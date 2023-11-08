@@ -13,9 +13,13 @@ struct Light
     vec3 position;
     vec3 color;
 
+    vec3 direction;
+
     float k_constant;
     float k_linear;
     float k_quadratic;
+
+    float cut_off;
 
     int type;
 };
@@ -47,18 +51,43 @@ void main ()
     {
         // Directions
         vec3 camera_direction = normalize(camera_position - world_position);
-        vec3 light_direction = normalize(lights[i].position - world_position);
-        vec3 reflection_direction = reflect(-light_direction, world_normal);
+        vec3 light_direction;
+        float attenuation = 1;
+
+        // Directional light
+        if(lights[i].type == 1)
+        {
+            light_direction = lights[i].direction;
+        }
+
+        // Point light or Spotlight
+        else{
+            light_direction = normalize(lights[i].position - world_position);
+
+            // Spotlight
+            if(lights[i].type == 2)
+            {
+                float theta = dot(light_direction, normalize(-lights[i].direction));
+                if(theta <= lights[i].cut_off)
+                continue;
+            }
+        }
+
+
         vec3 halfway_direction = normalize(camera_direction + light_direction);
 
-        // Attenuation
-        float light_distance = length(lights[i].position - world_position);
-        float attenuation =
-        calc_attenuation(
-        lights[i].k_constant,
-        lights[i].k_linear,
-        lights[i].k_quadratic,
-        light_distance);
+        // Point light or Spotlight
+        if(lights[i].type != 1)
+        {
+            // Attenuation
+            float light_distance = length(lights[i].position - world_position);
+            attenuation =
+            calc_attenuation(
+            lights[i].k_constant,
+            lights[i].k_linear,
+            lights[i].k_quadratic,
+            light_distance);
+        }
 
         // Diffuse
         float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
