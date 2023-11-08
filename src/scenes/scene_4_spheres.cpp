@@ -11,12 +11,12 @@ void Scene4Spheres::init_shader() {
 //
     this->shaders["lambert"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                           (char *) "resources\\shaders\\lambert.frag");
+////
+//    this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
+//                                        (char *) "resources\\shaders\\phong.frag");
 //
-    this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
-                                        (char *) "resources\\shaders\\phong.frag");
-
-    this->shaders["blinn"] = new Shader((char *) "resources\\shaders\\vertex.vert",
-                                        (char *) "resources\\shaders\\blinn.frag");
+//    this->shaders["blinn"] = new Shader((char *) "resources\\shaders\\vertex.vert",
+//                                        (char *) "resources\\shaders\\blinn.frag");
 }
 
 void Scene4Spheres::init_materials() {
@@ -40,6 +40,7 @@ void Scene4Spheres::init_camera() {
     for (auto &item: shaders) {
         this->camera->attach_observer(item.second);
     }
+    camera->attach_observer(dynamic_cast<Spotlight*>(lights[0]));
 
     camera->notify_observers();
     MouseHandler::get_instance().set_camera(this->camera);
@@ -51,12 +52,16 @@ void Scene4Spheres::init_models() {
 }
 
 void Scene4Spheres::init_light() {
-    this->lights.push_back(new PointLight(0));
-    this->lights.push_back(new PointLight(1));
+    {
+//        auto *light = new PointLight(this->lights.size());
+//        light->set_position(glm::vec3{0.0, 0.0, 0.0});
+//        this->lights.push_back(light);
+    }
 
-
-    this->lights[0]->set_position(glm::vec3{0.0, 0.0, 0.0});
-    this->lights[1]->set_position(glm::vec3{4.0, 0.0, 0.0});
+    {
+        auto *light = new Spotlight(this->lights.size());
+        this->lights.push_back(light);
+    }
 
     for (auto &item: shaders) {
         for (auto &light: lights) {
@@ -72,10 +77,11 @@ void Scene4Spheres::init_light() {
 }
 
 void Scene4Spheres::init_drawable_objects() {
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material1"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material2"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material3"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material4"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material1"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material2"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material3"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]));
 
     drawable_objects[0]->add_translation(glm::vec3(2, 0, 0), false);
     drawable_objects[1]->add_translation(glm::vec3(0, 2, 0), false);

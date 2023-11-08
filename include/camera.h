@@ -20,7 +20,6 @@
 #include "glm/mat4x4.hpp" // glm::mat4
 #include "glm/gtc/matrix_transform.hpp" // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "glm/gtc/type_ptr.hpp" // glm::value_ptr
-
 #include "observable.h"
 
 
@@ -46,7 +45,18 @@ public:
     glm::mat4 projection_matrix = glm::mat4{1.f};
     glm::mat4 view_matrix = glm::mat4{1.f};
 
-    const glm::vec3 &getEye() const;
+    const glm::vec3 &get_eye() const;
+
+    void set_eye(const glm::vec3 &eye);
+
+    const glm::vec3 &get_target() const;
+
+    void set_target(const glm::vec3 &target);
+
+//    void attach_spotlight(Spotlight *spotlight);
+//    void detach_spotlight();
+
+
 
 private:
     float alpha = 0.f;
@@ -55,4 +65,5 @@ private:
     glm::vec3 eye{0.f, 0.f, 5.f};
     glm::vec3 target{0.0f, 0.f, -1.f};
     glm::vec3 up{0.f, 1.f, 0.f};
+//    Spotlight *spotlight = nullptr;
 };

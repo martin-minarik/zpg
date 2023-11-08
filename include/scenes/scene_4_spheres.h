@@ -7,6 +7,7 @@
 #include "scenes/scene.h"
 #include "models/model_factory.h"
 #include "mouse_handler.h"
+#include "light/directional_light.h"
 
 
 class Scene4Spheres : public Scene {

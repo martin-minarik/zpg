@@ -31,13 +31,25 @@ void SceneTest3::init_models() {
 }
 
 void SceneTest3::init_light() {
-    this->point_light = new PointLight(0);
-
-    for (auto &item: shaders) {
-        this->point_light->attach_observer(item.second);
+    {
+        PointLight *light = new PointLight(0);
+        light->set_position(glm::vec3{0.0, 0.0, 0.0});
+        this->lights.push_back(light);
     }
 
-    this->point_light->set_position(glm::vec3{0.0, 0.0, -1.5});
+
+
+    for (auto &item: shaders) {
+        for (auto &light: lights) {
+            light->attach_observer(item.second);
+        }
+
+        item.second->upload_number_of_lights(this->lights.size());
+    }
+
+    for (auto &light: lights) {
+        light->notify_observers();
+    }
 }
 
 void SceneTest3::init_drawable_objects() {

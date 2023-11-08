@@ -27,19 +27,20 @@ Scene::~Scene() {
         item.second = nullptr;
     }
 
+    for (auto &light: lights) {
+        delete light;
+    }
+
     if (camera)
         delete camera;
-
-    if (point_light)
-        delete point_light;
 }
 
 void Scene::init() {
     this->init_shader();
     this->init_models();
     this->init_materials();
-    this->init_camera();
     this->init_light();
+    this->init_camera();
     this->init_drawable_objects();
 }
 

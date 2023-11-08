@@ -63,9 +63,37 @@ void Camera::move_backward(float delta_time) {
     notify_observers();
 }
 
-const glm::vec3 &Camera::getEye() const {
+const glm::vec3 &Camera::get_eye() const {
     return eye;
 }
+
+void Camera::set_eye(const glm::vec3 &eye) {
+    Camera::eye = eye;
+//    if(spotlight)
+//        spotlight->set_position(eye);
+}
+
+const glm::vec3 &Camera::get_target() const {
+    return target;
+}
+
+void Camera::set_target(const glm::vec3 &target) {
+    Camera::target = target;
+//    if(spotlight)
+//        spotlight->set_direction(target);
+}
+
+
+//void Camera::attach_spotlight(Spotlight *spotlight) {
+//    this->spotlight = spotlight;
+//}
+//
+//void Camera::detach_spotlight() {
+//    this->spotlight = nullptr;
+//}
+
+
+
 
 
 

@@ -78,21 +78,45 @@ void Shader::update(Camera *camera) {
     this->use();
     this->upload("projection_matrix", camera->projection_matrix);
     this->upload("view_matrix", camera->view_matrix);
-    this->upload("camera_position", camera->getEye());
+    this->upload("camera_position", camera->get_eye());
 }
 
-void Shader::update(PointLight *light) {
+void Shader::update(Light *light, int descriptor) {
     this->use();
 
     std::string item_locator = "lights[" + std::to_string(light->get_id()) + "]";
-    this->upload((item_locator + ".position").c_str(), light->get_position());
     this->upload((item_locator + ".color").c_str(), light->get_color());
 
+    if (descriptor == LightClasses::POINT_LIGHT) {
+        auto &point_light = dynamic_cast<PointLight &>(*light);
+        this->upload((item_locator + ".position").c_str(), point_light.get_position());
 
-    const Attenuation &attenuation = light->get_attenuation();
-    this->upload((item_locator + ".k_constant").c_str(), attenuation.k_constant);
-    this->upload((item_locator + ".k_linear").c_str(), attenuation.k_linear);
-    this->upload((item_locator + ".k_quadratic").c_str(), attenuation.k_quadratic);
+        const Attenuation &attenuation = point_light.get_attenuation();
+        this->upload((item_locator + ".k_constant").c_str(), attenuation.k_constant);
+        this->upload((item_locator + ".k_linear").c_str(), attenuation.k_linear);
+        this->upload((item_locator + ".k_quadratic").c_str(), attenuation.k_quadratic);
+
+        this->upload((item_locator + ".type").c_str(), 0);
+
+    } else if (descriptor == LightClasses::DIRECTIONAL_LIGHT) {
+        auto &directional_light = dynamic_cast<DirectionalLight &>(*light);
+        this->upload((item_locator + ".direction").c_str(), directional_light.get_direction());
+        this->upload((item_locator + ".type").c_str(), 1);
+
+    } else if (descriptor == LightClasses::SPOT_LIGHT) {
+        auto &spotlight = dynamic_cast<Spotlight &>(*light);
+        this->upload((item_locator + ".position").c_str(), spotlight.get_position());
+        this->upload((item_locator + ".direction").c_str(), spotlight.get_direction());
+
+        const Attenuation &attenuation = spotlight.get_attenuation();
+        this->upload((item_locator + ".k_constant").c_str(), attenuation.k_constant);
+        this->upload((item_locator + ".k_linear").c_str(), attenuation.k_linear);
+        this->upload((item_locator + ".k_quadratic").c_str(), attenuation.k_quadratic);
+
+        this->upload((item_locator + ".cut_off").c_str(), spotlight.get_cut_off());
+
+        this->upload((item_locator + ".type").c_str(), 2);
+    }
 }
 
 void Shader::upload_number_of_lights(int n) const {

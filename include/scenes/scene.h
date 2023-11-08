@@ -13,7 +13,7 @@
 // ZPG
 #include "shader.h"
 #include "camera.h"
-#include "light/point_light.h"
+#include "light/light.h"
 #include "drawable_object.h"
 #include "models/model.h"
 
@@ -44,10 +44,9 @@ protected:
     virtual void init_drawable_objects() = 0;
 
     Camera *camera;
-    PointLight *point_light;
     std::map<std::string, Model *> models;
     std::map<std::string, Material *> materials;
-    std::vector<PointLight *> lights;
+    std::vector<Light *> lights;
     std::vector<DrawableObject *> drawable_objects;
     std::map<std::string, Shader *> shaders;
 };

@@ -10,9 +10,13 @@ struct Light
     vec3 position;
     vec3 color;
 
+    vec3 direction;
+
     float k_constant;
     float k_linear;
     float k_quadratic;
+
+    float cut_off;
 
     int type;
 };
@@ -38,8 +42,25 @@ void main () {
 
     for (int i=0; i < n_lights; ++i)
     {
+        // Directional light
+        if(lights[i].type == 1)
+        {
+            // Diffuse
+            float diffuse_strength = max(dot(normalize(lights[i].direction), normalize(world_normal)), 0.0);
+            diffuse += vec4 ((diffuse_strength * r_d) * lights[i].color, 0);
+            continue;
+        }
+
         // Direction
         vec3 light_direction = normalize(lights[i].position - world_position);
+
+        // Spotlight
+        if(lights[i].type == 2)
+        {
+            float theta = dot(light_direction, normalize(-lights[i].direction));
+            if(theta <= lights[i].cut_off)
+                continue;
+        }
 
         // Attenuation
         float light_distance = length(lights[i].position - world_position);

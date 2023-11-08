@@ -15,11 +15,13 @@
 #include "ShaderLoader.h"
 #include "transformation/transformation_component.h"
 #include "light/point_light.h"
+#include "light/light.h"
+#include "light/directional_light.h"
+#include "light/spotlight.h"
 #include "material/material.h"
 
 
-class Shader : private ShaderLoader, public Observer<Camera>, public Observer<PointLight>
-{
+class Shader : private ShaderLoader, public Observer<Camera>, public Observer<PointLight>, public Observer<Light> {
 public:
     Shader(char *vertex_shader_filepath, char *fragment_shader_filepath);
 
@@ -30,18 +32,24 @@ public:
     GLint get_uniform_location(const char *name) const;
 
     void upload_transformation(TransformationComponent *transformationComponent) const;
+
     void upload_material(Material *material) const;
+
     void upload_number_of_lights(int n) const;
 
     void upload(const char *name, const glm::mat4 &matrix) const;
+
     void upload(const char *name, const glm::vec3 &vec) const;
+
     void upload(const char *name, const glm::vec4 &vec) const;
+
     void upload(const char *name, const float &value) const;
+
     void upload(const char *name, const int &value) const;
 
-    void update(Camera *observable) override;
+    void update(Camera *camera) override;
 
-    void update(PointLight *observable) override;
+    void update(Light *light, int descriptor) override;
 
 private:
     void check_link_status() const;

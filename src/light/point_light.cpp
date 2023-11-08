@@ -5,16 +5,8 @@
 //
 
 
-PointLight::PointLight(int id) : id(id) {}
+PointLight::PointLight(int id) : Light(id) {}
 
-const glm::vec3 &PointLight::get_color() const {
-    return color;
-}
-
-void PointLight::set_color(const glm::vec3 &color) {
-    PointLight::color = color;
-    this->notify_observers();
-}
 
 const glm::vec3 &PointLight::get_position() const {
     return position;
@@ -34,6 +26,6 @@ void PointLight::set_attenuation(const Attenuation &attenuation_) {
     this->notify_observers();
 }
 
-int PointLight::get_id() const {
-    return id;
+void PointLight::notify_observers() {
+    Observable::notify_observers(LightClasses::POINT_LIGHT);
 }
