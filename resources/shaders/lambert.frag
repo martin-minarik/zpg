@@ -26,6 +26,7 @@ uniform int n_lights;
 
 // material
 uniform  vec4 object_color;
+uniform  vec4 ambient_color;
 uniform float r_a;
 uniform float r_d;
 
@@ -38,7 +39,7 @@ void main () {
     vec4 diffuse = vec4 (0);
 
     // Ambient
-    vec4 ambient = vec4 (0.1, 0.1, 0.1, 1.0) * r_a;
+    vec4 ambient = ambient_color * r_a;
 
     for (int i=0; i < n_lights; ++i)
     {

@@ -46,5 +46,13 @@ void Material::set_color(const glm::vec4 &color_) {
     color = color_;
 }
 
+const glm::vec4 &Material::get_ambient_color() const {
+    return ambient_color;
+}
+
+void Material::set_ambient_color(const glm::vec4 &ambientColor) {
+    ambient_color = ambientColor;
+}
+
 
 

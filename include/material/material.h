@@ -34,10 +34,15 @@ public:
 
     void set_color(const glm::vec4 &color_);
 
+    const glm::vec4 &get_ambient_color() const;
+
+    void set_ambient_color(const glm::vec4 &ambientColor);
+
 private:
     float r_a = 1;
     float r_d = 1;
     float r_s = 1;
     int specular_power = 32;
     glm::vec4 color{0.8, 0.8, 0.8, 1};
+    glm::vec4 ambient_color{0.1, 0.1, 0.1, 1.0};
 };
