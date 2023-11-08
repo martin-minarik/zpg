@@ -12,8 +12,8 @@ void Scene4Spheres::init_shader() {
     this->shaders["lambert"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                           (char *) "resources\\shaders\\lambert.frag");
 
-//    this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
-//                                        (char *) "resources\\shaders\\phong.frag");
+    this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
+                                        (char *) "resources\\shaders\\phong.frag");
 //
 //    this->shaders["blinn"] = new Shader((char *) "resources\\shaders\\vertex.vert",
 //                                        (char *) "resources\\shaders\\blinn.frag");
@@ -72,10 +72,10 @@ void Scene4Spheres::init_light() {
 }
 
 void Scene4Spheres::init_drawable_objects() {
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material1"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material2"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material3"]));
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material1"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material2"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material3"]));
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material4"]));
 
     drawable_objects[0]->add_translation(glm::vec3(2, 0, 0), false);
     drawable_objects[1]->add_translation(glm::vec3(0, 2, 0), false);

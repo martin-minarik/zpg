@@ -8,8 +8,6 @@
 void SceneTest3::init_shader() {
     this->shaders["phong"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                         (char *) "resources\\shaders\\phong.frag");
-    this->shaders["phong2"] = new Shader((char *) "resources\\shaders\\vertex.vert",
-                                        (char *) "resources\\shaders\\phong2.frag");
 }
 
 void SceneTest3::init_materials() {
