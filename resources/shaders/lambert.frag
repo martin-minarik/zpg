@@ -42,34 +42,38 @@ void main () {
 
     for (int i=0; i < n_lights; ++i)
     {
+        vec3 light_direction;
+        float attenuation = 1;
+
         // Directional light
-        if(lights[i].type == 1)
+        if (lights[i].type == 1)
         {
-            // Diffuse
-            float diffuse_strength = max(dot(normalize(lights[i].direction), normalize(world_normal)), 0.0);
-            diffuse += vec4 ((diffuse_strength * r_d) * lights[i].color, 0);
-            continue;
+            light_direction = normalize(lights[i].position - world_position);
         }
 
-        // Direction
-        vec3 light_direction = normalize(lights[i].position - world_position);
-
-        // Spotlight
-        if(lights[i].type == 2)
-        {
-            float theta = dot(light_direction, normalize(-lights[i].direction));
-            if(theta <= lights[i].cut_off)
+        else {
+            light_direction = normalize(lights[i].position - world_position);
+            // Spotlight
+            if (lights[i].type == 2)
+            {
+                float theta = dot(light_direction, normalize(-lights[i].direction));
+                if (theta <= lights[i].cut_off)
                 continue;
+            }
         }
 
-        // Attenuation
-        float light_distance = length(lights[i].position - world_position);
-        float attenuation =
-        calc_attenuation(
-        lights[i].k_constant,
-        lights[i].k_linear,
-        lights[i].k_quadratic,
-        light_distance);
+        // Point light or Spotlight
+        if(lights[i].type != 1)
+        {
+            // Attenuation
+            float light_distance = length(lights[i].position - world_position);
+            attenuation =
+            calc_attenuation(
+            lights[i].k_constant,
+            lights[i].k_linear,
+            lights[i].k_quadratic,
+            light_distance);
+        }
 
         // Diffuse
         float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
