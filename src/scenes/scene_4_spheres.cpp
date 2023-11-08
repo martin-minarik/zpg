@@ -51,13 +51,24 @@ void Scene4Spheres::init_models() {
 }
 
 void Scene4Spheres::init_light() {
-    this->point_light = new PointLight();
+    this->lights.push_back(new PointLight(0));
+    this->lights.push_back(new PointLight(1));
+
+
+    this->lights[0]->set_position(glm::vec3{0.0, 0.0, 0.0});
+    this->lights[1]->set_position(glm::vec3{4.0, 0.0, 0.0});
 
     for (auto &item: shaders) {
-        this->point_light->attach_observer(item.second);
+        for (auto &light: lights) {
+            light->attach_observer(item.second);
+        }
+
+        item.second->upload_number_of_lights(this->lights.size());
     }
 
-    this->point_light->set_position(glm::vec3{0.0, 0.0, 0.0});
+    for (auto &light: lights) {
+        light->notify_observers();
+    }
 }
 
 void Scene4Spheres::init_drawable_objects() {

@@ -31,13 +31,13 @@ struct Attenuation {
 
 class PointLight : public Observable<PointLight> {
 public:
-    PointLight();
+    explicit PointLight(int id);
 
-    const glm::vec3 &get_color() const;
+    [[nodiscard]] const glm::vec3 &get_color() const;
 
     void set_color(const glm::vec3 &color);
 
-    const glm::vec3 &get_position() const;
+    [[nodiscard]] const glm::vec3 &get_position() const;
 
     void set_position(const glm::vec3 &position);
 
@@ -45,8 +45,11 @@ public:
 
     [[maybe_unused]] void set_attenuation(const Attenuation &attenuation_);
 
+    int get_id() const;
+
 private:
+    int id;
     glm::vec3 color{1, 1, 1};
     glm::vec3 position{0, 0, 0};
-    Attenuation attenuation = {1, 0.1, 1};
+    Attenuation attenuation = {1, 0, 0};
 };

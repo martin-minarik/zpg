@@ -42,7 +42,7 @@ void SceneForest::init_models() {
 }
 
 void SceneForest::init_light() {
-    this->point_light = new PointLight();
+    this->point_light = new PointLight(0);
 
     for (auto &item: shaders) {
         this->point_light->attach_observer(item.second);

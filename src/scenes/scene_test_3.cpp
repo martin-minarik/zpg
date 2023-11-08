@@ -33,7 +33,7 @@ void SceneTest3::init_models() {
 }
 
 void SceneTest3::init_light() {
-    this->point_light = new PointLight();
+    this->point_light = new PointLight(0);
 
     for (auto &item: shaders) {
         this->point_light->attach_observer(item.second);

@@ -47,6 +47,7 @@ protected:
     PointLight *point_light;
     std::map<std::string, Model *> models;
     std::map<std::string, Material *> materials;
+    std::vector<PointLight *> lights;
     std::vector<DrawableObject *> drawable_objects;
     std::map<std::string, Shader *> shaders;
 };

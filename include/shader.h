@@ -31,6 +31,7 @@ public:
 
     void upload_transformation(TransformationComponent *transformationComponent) const;
     void upload_material(Material *material) const;
+    void upload_number_of_lights(int n) const;
 
     void upload(const char *name, const glm::mat4 &matrix) const;
     void upload(const char *name, const glm::vec3 &vec) const;

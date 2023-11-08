@@ -1,15 +1,24 @@
 #version 400
-//#define MAX_N_LIGHTS 10
+#define MAX_N_LIGHTS 10
 in vec3 world_position;
 in vec3 world_normal;
 out vec4 frag_colour;
 
 // lights
-uniform vec3 light_position;
-uniform vec3 light_color;
-uniform float light_k_constant;
-uniform float light_k_linear;
-uniform float light_k_quadratic;
+struct Light
+{
+    vec3 position;
+    vec3 color;
+
+    float k_constant;
+    float k_linear;
+    float k_quadratic;
+
+    int type;
+};
+
+uniform Light lights[MAX_N_LIGHTS];
+uniform int n_lights;
 
 // material
 uniform  vec4 object_color;
@@ -22,25 +31,30 @@ float calc_attenuation (float k_constant, float k_linear, float k_quadratic, flo
 }
 
 void main () {
+    vec4 diffuse = vec4 (0);
+
     // Ambient
     vec4 ambient = vec4 (0.1, 0.1, 0.1, 1.0) * r_a;
 
-    //    for (int i=0; i < n_lights; ++i)
-    //    {
-    //
-    //    }
+    for (int i=0; i < n_lights; ++i)
+    {
+        // Direction
+        vec3 light_direction = normalize(lights[i].position - world_position);
 
-    // Direction
-    vec3 light_direction = normalize(light_position - world_position);
+        // Attenuation
+        float light_distance = length(lights[i].position - world_position);
+        float attenuation =
+        calc_attenuation(
+        lights[i].k_constant,
+        lights[i].k_linear,
+        lights[i].k_quadratic,
+        light_distance);
 
-    // Attenuation
-    float light_distance = length(light_position - world_position);
-    float attenuation = calc_attenuation(light_k_constant, light_k_linear, light_k_quadratic, light_distance);
-
-    // Diffuse
-    float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
-    vec4 diffuse = vec4 ((diffuse_strength * r_d) * light_color, 1);
+        // Diffuse
+        float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
+        diffuse += vec4 ((diffuse_strength * r_d * attenuation) * lights[i].color, 0);
+    }
 
     // Final color
-    frag_colour = (ambient + diffuse * attenuation) * object_color;
+    frag_colour = (ambient + diffuse) * object_color;
 }

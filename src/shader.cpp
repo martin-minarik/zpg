@@ -83,12 +83,20 @@ void Shader::update(Camera *camera) {
 
 void Shader::update(PointLight *light) {
     this->use();
-    this->upload("light_position", light->get_position());
-    this->upload("light_color", light->get_color());
+
+    std::string item_locator = "lights[" + std::to_string(light->get_id()) + "]";
+    this->upload((item_locator + ".position").c_str(), light->get_position());
+    this->upload((item_locator + ".color").c_str(), light->get_color());
+
+
     const Attenuation &attenuation = light->get_attenuation();
-    this->upload("light_k_constant", attenuation.k_constant);
-    this->upload("light_k_linear", attenuation.k_linear);
-    this->upload("light_k_quadratic", attenuation.k_quadratic);
+    this->upload((item_locator + ".k_constant").c_str(), attenuation.k_constant);
+    this->upload((item_locator + ".k_linear").c_str(), attenuation.k_linear);
+    this->upload((item_locator + ".k_quadratic").c_str(), attenuation.k_quadratic);
+}
+
+void Shader::upload_number_of_lights(int n) const {
+    this->upload("n_lights", n);
 }
 
 
