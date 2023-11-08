@@ -96,6 +96,7 @@ void Shader::update(PointLight *light) {
 }
 
 void Shader::upload_number_of_lights(int n) const {
+    this->use();
     this->upload("n_lights", n);
 }
 
