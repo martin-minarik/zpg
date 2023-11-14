@@ -11,6 +11,7 @@ set(ZPG_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../libs)
 set(GLFW_DIR ${ZPG_LIBS}/glfw-3.3.8.bin.WIN64)
 set(GLEW_DIR ${ZPG_LIBS}/glew-2.1.0)
 set(GLM_DIR ${ZPG_LIBS}/glm-0.9.9.8)
+set(SOIL_DIR ${ZPG_LIBS}/soil)
 
 # Find and setup OpenGL for project
 find_package(OpenGL REQUIRED)
@@ -23,15 +24,32 @@ file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+## Soil
+##include(CMakePrintHelpers)
+#file(GLOB_RECURSE SOIL_SOURCES "${SOIL_DIR}/src/*.c")
+##cmake_print_variables(${SOIL_DIR})
+#add_library(Testus ${SOIL_SOURCES})
+#target_include_directories(${PROJECT_NAME} PRIVATE ${SOIL_DIR}/include)
+#target_link_libraries(${PROJECT_NAME} Testus)
+
+
+file(GLOB_RECURSE SOIL_SOURCES "${SOIL_DIR}/include/*.c")
+#    add_library(Testus ${SOIL_DIR}/include/SOIL.c ${SOIL_DIR}/include/stb_image_aug.c ${SOIL_DIR}/include/image_DXT.c ${SOIL_DIR}/include/image_helper.c)
+add_library(Testus ${SOIL_SOURCES})
+target_include_directories(${PROJECT_NAME} PRIVATE "${SOIL_DIR}/include")
+#    TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE ${SOIL_DIR}/lib/libSOIL.a)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} Testus)
+
+
 # Include external headers GLFW, GLEW, GLM
 target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${GLEW_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${GLM_DIR}/glm)
 
 # Link external GLFW, GLEW a OPENGL
-target_link_libraries(${PROJECT_NAME} PRIVATE ${GLFW_DIR}/lib-mingw-w64/glfw3.dll)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${GLEW_DIR}/bin/Release/x64/glew32.dll)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_gl_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${GLFW_DIR}/lib-mingw-w64/glfw3.dll)
+target_link_libraries(${PROJECT_NAME} ${GLEW_DIR}/bin/Release/x64/glew32.dll)
+target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY})
 
 # Copy glfw3.dll to cmake-build folder
 file(COPY ${GLFW_DIR}/lib-mingw-w64/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR})
