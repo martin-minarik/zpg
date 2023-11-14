@@ -14,4 +14,5 @@ void DrawableObject::draw() {
     shader.upload_transformation(this->transformation_composite.get());
     shader.upload_material(&this->material);
     model.draw();
+    shader.unbind();
 }

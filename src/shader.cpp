@@ -13,9 +13,12 @@ Shader::~Shader() {
     this->deleteShader();
 }
 
-
 void Shader::use() const {
     glUseProgram(this->shader_program);
+}
+
+void Shader::unbind() const {
+    glUseProgram(0);
 }
 
 void Shader::check_link_status() const {
@@ -63,6 +66,7 @@ void Shader::upload(const char *name, const int &value) const {
 void Shader::upload_transformation(TransformationComponent *transformationComponent) const {
     this->use();
     this->upload("model_matrix", transformationComponent->get_matrix());
+    this->unbind();
 }
 
 void Shader::upload_material(Material *material) const {
@@ -73,6 +77,7 @@ void Shader::upload_material(Material *material) const {
     this->upload("r_d", material->get_rd());
     this->upload("r_s", material->get_rs());
     this->upload("specular_power", material->get_specular_power());
+
 }
 
 void Shader::update(Camera *camera) {
@@ -124,7 +129,4 @@ void Shader::upload_number_of_lights(int n) const {
     this->use();
     this->upload("n_lights", n);
 }
-
-
-
 

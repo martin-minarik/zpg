@@ -29,6 +29,8 @@ public:
 
     void use() const;
 
+    void unbind() const;
+
     GLint get_uniform_location(const char *name) const;
 
     void upload_transformation(TransformationComponent *transformationComponent) const;
