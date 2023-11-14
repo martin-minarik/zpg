@@ -63,6 +63,7 @@ void main()
         vec3 camera_direction = normalize(camera_position - world_position);
         vec3 light_direction;
         float attenuation = 1;
+        float spotlight_intensity = 1;
 
         // Directional light
         if (lights[i].type == 1)
@@ -78,6 +79,7 @@ void main()
             if (lights[i].type == 2)
             {
                 float theta = dot(light_direction, normalize(-lights[i].direction));
+                spotlight_intensity = (theta - lights[i].cut_off) / (1 - lights[i].cut_off);
                 if (theta <= lights[i].cut_off)
                 continue;
             }
@@ -101,20 +103,20 @@ void main()
 
         // Diffuse
         float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
-        diffuse += vec4((diffuse_strength * r_d * attenuation) * lights[i].color, 1);
+        diffuse += vec4((diffuse_strength * r_d * attenuation * spotlight_intensity) * lights[i].color, 1);
 
         // Specular
         if (diffuse_strength != 0)
         {
             float spec = max(dot(world_normal, halfway_direction), 0.0);
             spec = pow(spec, specular_power);
-            specular += spec * r_s * attenuation * vec4(lights[i].color, 1.0);
+            specular += spec * r_s * attenuation * spotlight_intensity * vec4(lights[i].color, 1.0);
         }
     }
 
     // Final color
     if (has_texture)
-    frag_colour = (ambient + diffuse + specular) * texture(textureUnitID, uvc);
+        frag_colour = (ambient + diffuse + specular) * texture(textureUnitID, uvc);
     else
-    frag_colour = (ambient + diffuse + specular) * object_color;
+        frag_colour = (ambient + diffuse + specular) * object_color;
 }

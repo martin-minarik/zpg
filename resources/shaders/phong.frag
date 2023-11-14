@@ -54,6 +54,7 @@ void main()
     vec4 diffuse = vec4(0.0f);
     vec4 specular = vec4(0.0f);
 
+
     // Ambient
     vec4 ambient = ambient_color * r_a;
 
@@ -63,6 +64,7 @@ void main()
         vec3 camera_direction = normalize(camera_position - world_position);
         vec3 light_direction;
         float attenuation = 1;
+        float spotlight_intensity = 1;
 
         // Directional light
         if (lights[i].type == 1)
@@ -101,14 +103,14 @@ void main()
 
         // Diffuse
         float diffuse_strength = max(dot(normalize(light_direction), normalize(world_normal)), 0.0);
-        diffuse += vec4((diffuse_strength * r_d * attenuation) * lights[i].color, 1);
+        diffuse += vec4((diffuse_strength * r_d * attenuation * spotlight_intensity) * lights[i].color, 1);
 
         // Specular
         if (diffuse_strength != 0)
         {
             float spec = max(dot(camera_direction, reflection_direction), 0.0);
             spec = pow(spec, specular_power);
-            specular += spec * r_s * attenuation * vec4(lights[i].color, 1.0);
+            specular += spec * r_s * attenuation * spotlight_intensity * vec4(lights[i].color, 1.0);
         }
     }
 
