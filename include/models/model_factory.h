@@ -21,6 +21,7 @@
 #include "models/vertices/tree.h"
 #include "models/vertices/bushes.h"
 #include "models/vertices/gift.h"
+#include "models/vertices/uv_plain.h"
 
 class ModelFactory {
 public:
@@ -43,5 +44,7 @@ public:
     static Model *create_gift();
 
     static Model *create_bushes();
+
+    static Model *create_uv_plain();
 
 };

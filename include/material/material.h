@@ -10,7 +10,10 @@
 #include "glm/gtc/matrix_transform.hpp" // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "glm/gtc/type_ptr.hpp" // glm::value_ptr
 
+#include <memory>
+
 #include <observable.h>
+#include <texture.h>
 
 class Material {
 public:
@@ -42,6 +45,10 @@ public:
 
     void set_ambient_color(const glm::vec4 &ambientColor);
 
+    [[nodiscard]] const std::shared_ptr<Texture> &get_texture() const;
+
+    void set_texture(const std::shared_ptr<Texture> &texture);
+
 private:
     float r_a = 1;
     float r_d = 1;
@@ -49,4 +56,5 @@ private:
     int specular_power = 32;
     glm::vec4 color{0.8, 0.8, 0.8, 1};
     glm::vec4 ambient_color{0.1, 0.1, 0.1, 1.0};
+    std::shared_ptr<Texture> texture;
 };

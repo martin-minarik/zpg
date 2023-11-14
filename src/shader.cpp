@@ -63,6 +63,11 @@ void Shader::upload(const char *name, const int &value) const {
     glUniform1i(variable, value);
 }
 
+void Shader::upload(const char *name, const bool &value) const {
+    GLint variable = get_uniform_location(name);
+    glUniform1i(variable, value);
+}
+
 void Shader::upload_transformation(TransformationComponent *transformationComponent) const {
     this->use();
     this->upload("model_matrix", transformationComponent->get_matrix());
@@ -78,6 +83,19 @@ void Shader::upload_material(Material *material) const {
     this->upload("r_s", material->get_rs());
     this->upload("specular_power", material->get_specular_power());
 
+    const auto& texture = material->get_texture();
+    if(texture)
+    {
+        this->upload("has_texture", true);
+        this->upload_texture(texture.get());
+    }
+    else
+        this->upload("has_texture", false);
+}
+
+void Shader::upload_texture(Texture *texture) const
+{
+    texture->bind();
 }
 
 void Shader::update(Camera *camera) {
@@ -129,4 +147,6 @@ void Shader::upload_number_of_lights(int n) const {
     this->use();
     this->upload("n_lights", n);
 }
+
+
 

@@ -21,7 +21,8 @@
 #include "material/material.h"
 
 
-class Shader : private ShaderLoader, public Observer<Camera>, public Observer<PointLight>, public Observer<Light> {
+class Shader : private ShaderLoader, public Observer<Camera>, public Observer<PointLight>, public Observer<Light>
+{
 public:
     Shader(char *vertex_shader_filepath, char *fragment_shader_filepath);
 
@@ -37,6 +38,8 @@ public:
 
     void upload_material(Material *material) const;
 
+    void upload_texture(Texture *texture) const;
+
     void upload_number_of_lights(int n) const;
 
     void upload(const char *name, const glm::mat4 &matrix) const;
@@ -48,6 +51,8 @@ public:
     void upload(const char *name, const float &value) const;
 
     void upload(const char *name, const int &value) const;
+
+    void upload(const char *name, const bool &value) const;
 
     void update(Camera *camera) override;
 

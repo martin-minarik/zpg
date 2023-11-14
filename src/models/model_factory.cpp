@@ -36,6 +36,10 @@ Model *ModelFactory::create_by_name(const std::string &name) {
         return create_gift();
     }
 
+    else if (name == "uv_plain") {
+        return create_uv_plain();
+    }
+
     throw std::runtime_error("Model not found!");
 }
 
@@ -78,6 +82,10 @@ Model *ModelFactory::create_gift() {
     return new Model(gift, 66624);
 }
 
+Model *ModelFactory::create_uv_plain()
+{
+    return new Model(uv_plain, 6, true);
+}
 
 
 

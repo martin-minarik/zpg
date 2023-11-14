@@ -58,5 +58,15 @@ void Material::set_ambient_color(const glm::vec4 &ambientColor) {
     ambient_color = ambientColor;
 }
 
+const std::shared_ptr<Texture> &Material::get_texture() const
+{
+    return texture;
+}
+
+void Material::set_texture(const std::shared_ptr<Texture> &texture)
+{
+    Material::texture = texture;
+}
+
 
 
