@@ -24,21 +24,11 @@ file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-## Soil
-##include(CMakePrintHelpers)
-#file(GLOB_RECURSE SOIL_SOURCES "${SOIL_DIR}/src/*.c")
-##cmake_print_variables(${SOIL_DIR})
-#add_library(Testus ${SOIL_SOURCES})
-#target_include_directories(${PROJECT_NAME} PRIVATE ${SOIL_DIR}/include)
-#target_link_libraries(${PROJECT_NAME} Testus)
-
 
 file(GLOB_RECURSE SOIL_SOURCES "${SOIL_DIR}/include/*.c")
-#    add_library(Testus ${SOIL_DIR}/include/SOIL.c ${SOIL_DIR}/include/stb_image_aug.c ${SOIL_DIR}/include/image_DXT.c ${SOIL_DIR}/include/image_helper.c)
-add_library(Testus ${SOIL_SOURCES})
+add_library(soil_lib ${SOIL_SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE "${SOIL_DIR}/include")
-#    TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE ${SOIL_DIR}/lib/libSOIL.a)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} Testus)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} soil_lib)
 
 
 # Include external headers GLFW, GLEW, GLM
