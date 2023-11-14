@@ -5,6 +5,8 @@
 //
 
 #define MAX_N_LIGHTS 10
+
+in vec2 uvc;
 in vec3 world_position;
 in vec3 world_normal;
 out vec4 frag_colour;
@@ -30,6 +32,9 @@ uniform Light lights[MAX_N_LIGHTS];
 uniform int n_lights;
 
 // material
+uniform sampler2D textureUnitID;
+uniform bool has_texture;
+
 uniform  vec4 object_color;
 uniform  vec4 ambient_color;
 uniform float r_a;
@@ -87,5 +92,9 @@ void main () {
     }
 
     // Final color
-    frag_colour = (ambient + diffuse) * object_color;
+
+    if(has_texture)
+        frag_colour = (ambient + diffuse) * texture(textureUnitID, uvc);
+    else
+        frag_colour = (ambient + diffuse) * object_color;
 }

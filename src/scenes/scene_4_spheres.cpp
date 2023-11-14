@@ -74,7 +74,8 @@ void Scene4Spheres::init_light()
     {
         auto *light = new PointLight(this->lights.size());
         light->set_position(glm::vec3{0.0, 0.0, 0.0});
-        light->set_attenuation({1, 0.2, 1});
+//        light->set_attenuation({1, 0.2, 1});
+        light->set_attenuation({0.8, 0, 0});
         this->lights.push_back(light);
     }
 
@@ -102,7 +103,7 @@ void Scene4Spheres::init_drawable_objects()
     drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material3"]));
     drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]));
     drawable_objects.push_back(
-            new DrawableObject(*models["uv_plain"], *shaders["constant"], *materials["textured_material"]));
+            new DrawableObject(*models["uv_plain"], *shaders["blinn"], *materials["textured_material"]));
 
     drawable_objects[0]->add_translation(glm::vec3(2, 0, 0), false);
     drawable_objects[1]->add_translation(glm::vec3(0, 2, 0), false);
