@@ -68,5 +68,13 @@ void Material::set_texture(const std::shared_ptr<Texture> &texture)
     Material::texture = texture;
 }
 
+float Material::get_texture_resolution() const {
+    return texture_resolution;
+}
+
+void Material::set_texture_resolution(float textureResolution) {
+    texture_resolution = textureResolution;
+}
+
 
 

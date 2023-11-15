@@ -69,10 +69,16 @@ void Scene4Spheres::init_light() {
     }
 
     {
-        auto *light = new PointLight(this->lights.size());
-        light->set_position(glm::vec3{0.0, 0.0, 0.0});
-//        light->set_attenuation({1, 0.2, 1});
-        light->set_attenuation({0.8, 0, 0});
+//        auto *light = new PointLight(this->lights.size());
+//        light->set_position(glm::vec3{0.0, 0.0, 0.0});
+////        light->set_attenuation({1, 0.2, 1});
+//        light->set_attenuation({0.8, 0, 0});
+//        this->lights.push_back(light);
+    }
+
+    {
+        auto *light = new DirectionalLight(this->lights.size());
+        light->set_direction(glm::vec3{-1.0, 1.0, 0.3});
         this->lights.push_back(light);
     }
 

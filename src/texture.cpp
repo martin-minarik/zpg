@@ -11,6 +11,7 @@ Texture::Texture(const std::string &filepath) {
         std::cout << "An error occurred while loading texture." << std::endl;
         exit(EXIT_FAILURE);
     }
+
 }
 
 Texture::~Texture() {
@@ -20,9 +21,11 @@ Texture::~Texture() {
 
 void Texture::bind() const {
     glActiveTexture(GL_TEXTURE0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
     glBindTexture(GL_TEXTURE_2D, this->texture_id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+
 }
 
 void Texture::unbind() {

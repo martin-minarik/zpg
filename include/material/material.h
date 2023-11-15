@@ -49,6 +49,10 @@ public:
 
     void set_texture(const std::shared_ptr<Texture> &texture);
 
+    float get_texture_resolution() const;
+
+    void set_texture_resolution(float textureResolution);
+
 private:
     float r_a = 1;
     float r_d = 1;
@@ -56,5 +60,6 @@ private:
     int specular_power = 32;
     glm::vec4 color{0.8, 0.8, 0.8, 1};
     glm::vec4 ambient_color{0.1, 0.1, 0.1, 1.0};
+    float texture_resolution = 1;
     std::shared_ptr<Texture> texture;
 };

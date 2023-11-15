@@ -83,17 +83,16 @@ void Shader::upload_material(Material *material) const {
     this->upload("r_s", material->get_rs());
     this->upload("specular_power", material->get_specular_power());
 
-    const auto& texture = material->get_texture();
-    if(texture)
-    {
+    const auto &texture = material->get_texture();
+    if (texture) {
         this->upload_texture(texture.get());
-    }
-    else
+        this->upload("uv_resolution", material->get_texture_resolution());
+
+    } else
         this->upload("has_texture", false);
 }
 
-void Shader::upload_texture(Texture *texture) const
-{
+void Shader::upload_texture(Texture *texture) const {
     this->upload("has_texture", true);
     texture->bind();
 }

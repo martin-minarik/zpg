@@ -14,6 +14,9 @@ void SceneForest::init_shader() {
 
     this->shaders["blinn"] = new Shader((char *) "resources\\shaders\\vertex.vert",
                                         (char *) "resources\\shaders\\blinn.frag");
+
+    this->shaders["skybox"] = new Shader((char *) "resources\\shaders\\skybox.vert",
+                                         (char *) "resources\\shaders\\skybox.frag");
 }
 
 void SceneForest::init_materials() {
@@ -23,6 +26,13 @@ void SceneForest::init_materials() {
     this->materials["sphere"] = new Material(glm::vec4{0.5, 0.7, 0.9, 1});
     this->materials["suzie"] = new Material(glm::vec4{0.9, 0.2, 0.2, 1});
     this->materials["gift"] = new Material(glm::vec4{0.9, 0.9, 0.0, 1});
+
+
+    auto grass_material = new Material();
+    auto texture = std::make_shared<Texture>("resources\\textures\\grass.png");
+    grass_material->set_texture(texture);
+    grass_material->set_texture_resolution(20);
+    this->materials["grass_material"] = grass_material;
 
 }
 
@@ -48,6 +58,7 @@ void SceneForest::init_models() {
     this->models["suzie-flat"] = ModelFactory::create_by_name("suzie-flat");
     this->models["suzie-smooth"] = ModelFactory::create_by_name("suzie-flat");
     this->models["gift"] = ModelFactory::create_by_name("gift");
+    this->models["uv_plain"] = ModelFactory::create_by_name("uv_plain");
 }
 
 void SceneForest::init_light() {
@@ -79,9 +90,9 @@ void SceneForest::init_light() {
 }
 
 void SceneForest::init_drawable_objects() {
-    auto plain_ = new DrawableObject(*models["plain"], *shaders["blinn"], *materials["plain"]);
-    plain_->add_scale(glm::vec3(100, 1, 100), false);
-    drawable_objects.push_back(plain_);
+    auto grass = new DrawableObject(*models["uv_plain"], *shaders["constant"], *materials["grass_material"]);
+    grass->add_scale(glm::vec3(100, 1, 100), false);
+    drawable_objects.push_back(grass);
 
     auto suzie = new DrawableObject(*models["suzie-smooth"], *shaders["phong"], *materials["suzie"]);
     suzie->add_translation(glm::vec3(0, 1, 2), false);
@@ -104,7 +115,7 @@ void SceneForest::init_drawable_objects() {
 
         auto random_scale = (float) (rand() % (80 - 15 + 1) + 15) / 100;
 
-        auto obj = new DrawableObject(*models["tree"], *shaders["phong"], *materials["tree"]);
+        auto obj = new DrawableObject(*models["tree"], *shaders["lambert"], *materials["tree"]);
         obj->add_translation(glm::vec3{random_x, 0, random_z});
         obj->add_scale(glm::vec3{random_scale});
         drawable_objects.push_back(obj);
@@ -139,7 +150,15 @@ void SceneForest::init_drawable_objects() {
 }
 
 void SceneForest::init_skybox() {
+    auto texture =
+            std::make_shared<SkyBoxTexture>("resources\\textures\\posx.jpg",
+                                            "resources\\textures\\negx.jpg",
+                                            "resources\\textures\\posy.jpg",
+                                            "resources\\textures\\negy.jpg",
+                                            "resources\\textures\\posz.jpg",
+                                            "resources\\textures\\negz.jpg");
 
+    this->skybox = std::make_shared<SkyBox>(*shaders["skybox"], texture);
 }
 
 
