@@ -11,6 +11,11 @@ Model::Model(const float *vertices, int size, int number_of_vertices, bool has_u
     make_vao();
 }
 
+Model::~Model() {
+    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &VAO);
+}
+
 void Model::draw() const
 {
     glBindVertexArray(this->VAO);

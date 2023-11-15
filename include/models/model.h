@@ -29,6 +29,7 @@ public:
 
     explicit Model(const float *vertices, int size, int number_of_vertices, bool has_uv);
 
+    ~Model();
 
     void draw() const;
 
