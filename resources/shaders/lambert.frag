@@ -60,7 +60,7 @@ void main () {
         // Directional light
         if (lights[i].type == 1)
         {
-            light_direction = normalize(lights[i].position - world_position);
+            light_direction = normalize(lights[i].direction);
         }
 
         else {

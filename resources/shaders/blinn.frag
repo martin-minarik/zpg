@@ -68,7 +68,7 @@ void main()
         // Directional light
         if (lights[i].type == 1)
         {
-            light_direction = lights[i].direction;
+            light_direction = normalize(lights[i].direction);
         }
 
         // Point light or Spotlight
