@@ -1,5 +1,9 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
 // Include Glew
 #include "GL/glew.h"
 // Include GLFW

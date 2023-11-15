@@ -1,5 +1,9 @@
 #include "texture.h"
 
+//
+// Created by Martin Minarik
+//
+
 Texture::Texture(const std::string &filepath) {
     glActiveTexture(GL_TEXTURE0);
     this->texture_id = SOIL_load_OGL_texture(filepath.c_str(),

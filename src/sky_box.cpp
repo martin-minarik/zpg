@@ -1,5 +1,9 @@
 #include "sky_box.h"
 
+//
+// Created by Martin Minarik
+//
+
 SkyBox::SkyBox(Shader &shader, const shared_ptr<SkyBoxTexture> &texture)
         : shader(shader), texture(texture) {
 

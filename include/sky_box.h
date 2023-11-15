@@ -1,5 +1,9 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
 #include <vector>
 
 #include <GL/glew.h>

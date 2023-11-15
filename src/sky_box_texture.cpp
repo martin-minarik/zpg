@@ -1,10 +1,9 @@
-//
-// Created by Martin on 15.11.2023.
-//
-
 #include "sky_box_texture.h"
 #include "texture.h"
 
+//
+// Created by Martin Minarik
+//
 
 SkyBoxTexture::SkyBoxTexture(const std::string &left_face_filepath, const std::string &right_face_filepath,
                              const std::string &top_face_filepath, const std::string &bottom_face_filepath,

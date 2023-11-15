@@ -1,5 +1,9 @@
 #pragma once
 
+//
+// Created by Martin Minarik
+//
+
 #include <texture.h>
 
 class SkyBoxTexture : public Texture {
