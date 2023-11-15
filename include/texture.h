@@ -8,16 +8,20 @@
 #include "SOIL.h"
 
 #include <string>
+#include <iostream>
 
-class Texture
-{
+class Texture {
 public:
-    explicit Texture(const std::string& filepath);
+    explicit Texture() = default;
+
+    explicit Texture(const std::string &filepath);
 
     virtual ~Texture();
 
-    void bind() const;
-    static void unbind() ;
-private:
+    virtual void bind() const;
+
+    virtual void unbind();
+
+protected:
     GLuint texture_id;
 };

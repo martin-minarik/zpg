@@ -6,6 +6,11 @@ Texture::Texture(const std::string &filepath) {
                                              SOIL_LOAD_RGBA,
                                              SOIL_CREATE_NEW_ID,
                                              0);
+
+    if (!this->texture_id) {
+        std::cout << "An error occurred while loading texture." << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 Texture::~Texture() {

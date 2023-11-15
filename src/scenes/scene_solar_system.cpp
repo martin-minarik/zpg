@@ -118,3 +118,7 @@ void SceneSolarSystem::update(float delta_time) {
         drawable_object->apply_transform();
     }
 }
+
+void SceneSolarSystem::init_skybox() {
+
+}

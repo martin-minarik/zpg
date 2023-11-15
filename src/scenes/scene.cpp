@@ -42,16 +42,28 @@ void Scene::init() {
     this->init_light();
     this->init_camera();
     this->init_drawable_objects();
+    this->init_skybox();
 }
 
 void Scene::draw() {
+    this->draw_skybox();
+
     for (auto &drawable_object: drawable_objects)
         drawable_object->draw();
+}
+
+void Scene::draw_skybox() {
+    glDepthMask(GL_FALSE);
+    if (this->skybox)
+        this->skybox->draw();
+    glDepthMask(GL_TRUE);
 }
 
 void Scene::update(float delta_time) {
 
 }
+
+
 
 
 

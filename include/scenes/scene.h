@@ -16,6 +16,7 @@
 #include "light/light.h"
 #include "drawable_object.h"
 #include "models/model.h"
+#include "sky_box.h"
 
 
 class Scene {
@@ -27,6 +28,8 @@ public:
     virtual void init();
 
     virtual void draw();
+
+    virtual void draw_skybox();
 
     virtual void update(float delta_time);
 
@@ -43,10 +46,14 @@ protected:
 
     virtual void init_drawable_objects() = 0;
 
+    virtual void init_skybox() = 0;
+
     Camera *camera;
     std::map<std::string, Model *> models;
     std::map<std::string, Material *> materials;
     std::vector<Light *> lights;
     std::vector<DrawableObject *> drawable_objects;
     std::map<std::string, Shader *> shaders;
+
+    std::shared_ptr<SkyBox> skybox;
 };

@@ -15,7 +15,6 @@ private:
 
     void init_models() override;
 
-private:
     void init_materials() override;
 
     void init_camera() override;
@@ -23,4 +22,6 @@ private:
     void init_light() override;
 
     void init_drawable_objects() override;
+
+    void init_skybox() override;
 };

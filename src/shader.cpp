@@ -86,7 +86,6 @@ void Shader::upload_material(Material *material) const {
     const auto& texture = material->get_texture();
     if(texture)
     {
-        this->upload("has_texture", true);
         this->upload_texture(texture.get());
     }
     else
@@ -95,6 +94,7 @@ void Shader::upload_material(Material *material) const {
 
 void Shader::upload_texture(Texture *texture) const
 {
+    this->upload("has_texture", true);
     texture->bind();
 }
 

@@ -138,5 +138,9 @@ void SceneForest::init_drawable_objects() {
     }
 }
 
+void SceneForest::init_skybox() {
+
+}
+
 
 

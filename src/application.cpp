@@ -18,6 +18,7 @@ void Application::run() {
 }
 
 void Application::loop() {
+    glEnable(GL_DEPTH_TEST);
     auto last_time = (float) glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
         const auto now = (float) glfwGetTime();
@@ -27,8 +28,9 @@ void Application::loop() {
         // clear color and depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        scene->update(delta_time);
         scene->draw();
+
+        scene->update(delta_time);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
@@ -67,8 +69,6 @@ void Application::init_opengl() {
     glfwGetFramebufferSize(window, &width, &height);
     float ratio = width / (float) height;
     glViewport(0, 0, width, height);
-
-    glEnable(GL_DEPTH_TEST);
 
     print_opengl_info();
 }

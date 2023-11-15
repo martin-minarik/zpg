@@ -63,5 +63,9 @@ void SceneTest3::init_drawable_objects() {
     }
 }
 
+void SceneTest3::init_skybox() {
+
+}
+
 
 

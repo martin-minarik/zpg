@@ -24,4 +24,6 @@ private:
     void init_light() override;
 
     void init_drawable_objects() override;
+
+    void init_skybox() override;
 };

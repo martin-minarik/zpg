@@ -27,6 +27,8 @@ private:
 
     void init_drawable_objects() override;
 
+    void init_skybox() override;
+
 private:
     std::shared_ptr<Rotation> sun_rotation;
     std::shared_ptr<Rotation> moon_rotation;
