@@ -5,45 +5,40 @@ project(zpg_min0139)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Set aliases for paths
+# Set paths
 set(RESOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)
-set(ZPG_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../libs)
-set(GLFW_DIR ${ZPG_LIBS}/glfw-3.3.8.bin.WIN64)
-set(GLEW_DIR ${ZPG_LIBS}/glew-2.1.0)
-set(GLM_DIR ${ZPG_LIBS}/glm-0.9.9.8)
-set(SOIL_DIR ${ZPG_LIBS}/soil)
 
-# Find and setup OpenGL for project
+# Find scripts
 find_package(OpenGL REQUIRED)
+find_library(SOIL_LIBRARY NAMES soil)
+find_package(assimp REQUIRED)
+find_package(GLM REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(glfw3 REQUIRED)
+unset(SOIL_INCLUDE_DIRS CACHE)
+find_path(
+        SOIL_INCLUDE_DIRS
+        NAMES "SOIL.h"
+        PATH_SUFFIXES  "SOIL"
+)
 
-# Set the include directory
+
+# Project HEADERS + SOURCES
 include_directories(${CMAKE_SOURCE_DIR}/include)
-
-# Get the list of source files
 file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
+# Add exe
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+# Libs - include headers
+target_include_directories(${PROJECT_NAME} PRIVATE ${SOIL_INCLUDE_DIRS})
 
-file(GLOB_RECURSE SOIL_SOURCES "${SOIL_DIR}/include/*.c")
-add_library(soil_lib ${SOIL_SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE "${SOIL_DIR}/include")
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} soil_lib)
-
-
-# Include external headers GLFW, GLEW, GLM
-target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_DIR}/include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${GLEW_DIR}/include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${GLM_DIR}/glm)
-
-# Link external GLFW, GLEW a OPENGL
-target_link_libraries(${PROJECT_NAME} ${GLFW_DIR}/lib-mingw-w64/glfw3.dll)
-target_link_libraries(${PROJECT_NAME} ${GLEW_DIR}/bin/Release/x64/glew32.dll)
+# Libs - link
+target_link_libraries(${PROJECT_NAME} ${ASSIMP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SOIL_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY})
+target_link_libraries(${PROJECT_NAME} GLEW::GLEW)
+target_link_libraries(${PROJECT_NAME} glfw)
 
-# Copy glfw3.dll to cmake-build folder
-file(COPY ${GLFW_DIR}/lib-mingw-w64/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR})
-# Copy glfw3.dll to cmake-build folder
-file(COPY ${GLEW_DIR}/bin/Release/x64/glew32.dll DESTINATION ${CMAKE_BINARY_DIR})
 # Copy resources
 file(COPY ${RESOURCES_DIR} DESTINATION ${CMAKE_BINARY_DIR})
