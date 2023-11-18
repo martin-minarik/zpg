@@ -53,12 +53,6 @@ void Application::init_opengl() {
         exit(EXIT_FAILURE);
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE,
-                   GLFW_OPENGL_CORE_PROFILE);
-
     init_window();
 
     // start GLEW extension handler
@@ -120,14 +114,3 @@ void Application::set_scene(Scene *scene_) {
     this->scene = scene_;
     this->scene->init();
 }
-
-
-
-
-
-
-
-
-
-
-
