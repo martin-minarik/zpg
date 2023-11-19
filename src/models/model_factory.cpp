@@ -43,54 +43,48 @@ Model *ModelFactory::create_by_name(const std::string &name) {
 }
 
 Model *ModelFactory::create_triangle() {
-    return new Model(triangle, 18);
+    return Model::from_position_normal(triangle);
 }
 
 Model *ModelFactory::create_square() {
-    return new Model(square, 36);
+    return Model::from_position_normal(square);
 }
 
 Model *ModelFactory::create_cube() {
-    return new Model(cube, 144);
+    return Model::from_position_normal(cube);
 }
 
 Model *ModelFactory::create_plain() {
-    return new Model(plain, 6);
+    return Model::from_position_normal(plain);
 }
 
 Model *ModelFactory::create_sphere() {
-    return new Model(sphere, 2880);
+    return Model::from_position_normal(sphere);
 }
 
 Model *ModelFactory::create_suzie(bool smooth) {
     if (smooth)
-        return new Model(suziSmooth, 2904);
+        return Model::from_position_normal(suziSmooth);
 
-    return new Model(suziFlat, 2904);
+    return Model::from_position_normal(suziFlat);
 }
 
 Model *ModelFactory::create_tree() {
-    return new Model(tree, 92814);
+    return Model::from_position_normal(tree);
 }
 
 Model *ModelFactory::create_bushes() {
-    return new Model(bushes, 8730);
+    return Model::from_position_normal(bushes);
 }
 
 Model *ModelFactory::create_gift() {
-    return new Model(gift, 66624);
+    return Model::from_position_normal(gift);
 }
 
 Model *ModelFactory::create_uv_plain() {
-    return new Model(uv_plain, 6, true);
+    return Model::from_position_normal_uv(uv_plain);
 }
 
 Model *ModelFactory::create_from_file(const std::string &name) {
     return Model::from_file(name.c_str());
 }
-
-
-
-
-
-

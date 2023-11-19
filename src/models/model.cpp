@@ -4,12 +4,6 @@
 // Created by Martin Minarik
 //
 
-Model::Model(const float *vertices, int size, int number_of_vertices, bool has_uv)
-        : number_of_vertices(number_of_vertices), has_uv_(has_uv) {
-    make_vbo(vertices, size);
-    make_vao();
-}
-
 Model::~Model() {
     glDeleteBuffers(1, &VBO);
     glDeleteVertexArrays(1, &VAO);
@@ -41,44 +35,45 @@ void Model::bind_vbo_to_vao() {
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 }
 
-void Model::make_vao() {
-    this->bind_vbo_to_vao();
+Model *Model::from_position_normal(const float *vertices, int size) {
+    Model *model = new Model();
+    int vertex_size = 6;
+    model->number_of_vertices = size / vertex_size;
+
+    model->make_vbo(vertices, size);
+    model->bind_vbo_to_vao();
 
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
 
-    if (this->has_uv_)
-        glEnableVertexAttribArray(2);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * vertex_size, (GLvoid *) nullptr);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * vertex_size, (GLvoid *) (sizeof(float) * 3));
 
-    auto vertex_size = (this->has_uv_) ? 8 : 6;
+    return model;
+}
 
-    glVertexAttribPointer(
-            0,
-            3,
-            GL_FLOAT,
-            GL_FALSE,
-            sizeof(float) * vertex_size,
-            (GLvoid *) nullptr);
-    glVertexAttribPointer(
-            1,
-            3,
-            GL_FLOAT,
-            GL_FALSE,
-            sizeof(float) * vertex_size,
-            (GLvoid *) (sizeof(float) * 3));
-    if (this->has_uv_) {
-        glVertexAttribPointer(
-                2,
-                2,
-                GL_FLOAT,
-                GL_FALSE,
-                sizeof(float) * vertex_size,
-                (GLvoid *) (sizeof(float) * (vertex_size - 2)));
-    }
+Model *Model::from_position_normal_uv(const float *vertices, int size) {
+    Model *model = new Model();
+    int vertex_size = 8;
+    model->number_of_vertices = size / vertex_size;
+
+    model->make_vbo(vertices, size);
+    model->bind_vbo_to_vao();
+
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * vertex_size, (GLvoid *) nullptr);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * vertex_size, (GLvoid *) (sizeof(float) * 3));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * vertex_size, (GLvoid *) (sizeof(float) * 6));
+
+    return model;
 }
 
 Model *Model::from_file(const char *file_path) {
     Model *model = new Model();
+    int vertex_size = 8;
 
     auto vertices = Model::load_model(file_path, model->number_of_vertices);
     model->make_vbo(vertices);
@@ -89,9 +84,9 @@ Model *Model::from_file(const char *file_path) {
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *) 0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *) (sizeof(float) * 3));
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *) (sizeof(float) * 6));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertex_size * sizeof(float), (GLvoid *) 0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertex_size * sizeof(float), (GLvoid *) (sizeof(float) * 3));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, vertex_size * sizeof(float), (GLvoid *) (sizeof(float) * 6));
 
     return model;
 }
@@ -143,5 +138,3 @@ std::vector<float> Model::load_model(const char *file_path, int &out_number_of_v
 
     return data;
 }
-
-

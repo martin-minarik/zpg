@@ -4,54 +4,48 @@
 // Created by Martin Minarik
 //
 
-
-
 #include <GL/glew.h>
 
-#include<assimp/Importer.hpp>
-#include<assimp/scene.h>
-#include<assimp/postprocess.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <assimp/cimport.h>
 
 #include <iostream>
 #include <exception>
 #include <vector>
 
-class Model
-{
+class Model {
 public:
-    template<int N>
-    Model(const float (&vertices)[N], int number_of_vertices)
-            : Model(vertices, N, number_of_vertices, false)
-    {
-
-    }
-
-    template<int N>
-    Model(const float (&vertices)[N], int number_of_vertices, bool has_uv)
-            : Model(vertices, N, number_of_vertices, has_uv)
-    {
-
-    }
-
-    explicit Model(const float *vertices, int size, int number_of_vertices, bool has_uv);
-
     ~Model();
 
     void draw() const;
 
-    static Model* from_file(const char *file_path);
+    static Model *from_file(const char *file_path);
 
+    template<int N>
+    static Model *from_position_normal(const float (&vertices)[N]) {
+        return Model::from_position_normal(vertices, N);
+    }
+
+    static Model *from_position_normal(const float *vertices, int size);
+
+    template<int N>
+    static Model *from_position_normal_uv(const float (&vertices)[N]) {
+        return Model::from_position_normal_uv(vertices, N);
+    }
+
+    static Model *from_position_normal_uv(const float *vertices, int size);
 
 
 private:
     Model() = default;
 
     void make_vbo(const float *vertices, int size);
+
     void make_vbo(const std::vector<float> &vertices);
+
     void bind_vbo_to_vao();
-
-
-    void make_vao();
 
     static std::vector<float> load_model(const char *file_path, int &out_number_of_vertices);
 
