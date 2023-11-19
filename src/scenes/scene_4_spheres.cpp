@@ -60,6 +60,7 @@ void Scene4Spheres::init_models() {
     this->models["sphere"] = ModelFactory::create_by_name("sphere");
     this->models["plain"] = ModelFactory::create_by_name("plain");
     this->models["uv_plain"] = ModelFactory::create_by_name("uv_plain");
+    this->models["house"] = ModelFactory::create_from_file("resources\\models\\model.obj");
 }
 
 void Scene4Spheres::init_light() {
@@ -103,6 +104,9 @@ void Scene4Spheres::init_drawable_objects() {
     drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]));
     drawable_objects.push_back(
             new DrawableObject(*models["uv_plain"], *shaders["blinn"], *materials["textured_material"]));
+
+    drawable_objects.push_back(
+            new DrawableObject(*models["house"], *shaders["blinn"], *materials["material1"]));
 
     drawable_objects[0]->add_translation(glm::vec3(2, 0, 0), false);
     drawable_objects[1]->add_translation(glm::vec3(0, 2, 0), false);

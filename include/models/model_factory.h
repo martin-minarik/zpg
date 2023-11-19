@@ -27,6 +27,8 @@ class ModelFactory {
 public:
     static Model *create_by_name(const std::string &name);
 
+    static Model *create_from_file(const std::string &name);
+
     static Model *create_triangle();
 
     static Model *create_square();
@@ -46,5 +48,4 @@ public:
     static Model *create_bushes();
 
     static Model *create_uv_plain();
-
 };

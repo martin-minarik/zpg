@@ -34,9 +34,8 @@ Model *ModelFactory::create_by_name(const std::string &name) {
 
     } else if (name == "gift") {
         return create_gift();
-    }
 
-    else if (name == "uv_plain") {
+    } else if (name == "uv_plain") {
         return create_uv_plain();
     }
 
@@ -82,9 +81,12 @@ Model *ModelFactory::create_gift() {
     return new Model(gift, 66624);
 }
 
-Model *ModelFactory::create_uv_plain()
-{
+Model *ModelFactory::create_uv_plain() {
     return new Model(uv_plain, 6, true);
+}
+
+Model *ModelFactory::create_from_file(const std::string &name) {
+    return Model::from_file(name.c_str());
 }
 
 

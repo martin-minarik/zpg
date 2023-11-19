@@ -8,7 +8,13 @@
 
 #include <GL/glew.h>
 
+#include<assimp/Importer.hpp>
+#include<assimp/scene.h>
+#include<assimp/postprocess.h>
+
+#include <iostream>
 #include <exception>
+#include <vector>
 
 class Model
 {
@@ -33,14 +39,23 @@ public:
 
     void draw() const;
 
-    [[nodiscard]] bool has_uv() const;
+    static Model* from_file(const char *file_path);
 
-protected:
+
+
+private:
+    Model() = default;
+
     void make_vbo(const float *vertices, int size);
+    void make_vbo(const std::vector<float> &vertices);
+    void bind_vbo_to_vao();
+
 
     void make_vao();
 
-protected:
+    static std::vector<float> load_model(const char *file_path, int &out_number_of_vertices);
+
+private:
     bool has_uv_ = false;
     int number_of_vertices = 0;
     GLuint VBO = 0;

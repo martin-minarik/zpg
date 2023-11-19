@@ -109,8 +109,7 @@ float Application::get_delta_time() const {
 }
 
 void Application::set_scene(Scene *scene_) {
-    if(this->scene)
-        delete scene;
+    delete scene;
     this->scene = scene_;
     this->scene->init();
 }

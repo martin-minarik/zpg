@@ -19,7 +19,7 @@ unset(SOIL_INCLUDE_DIRS CACHE)
 find_path(
         SOIL_INCLUDE_DIRS
         NAMES "SOIL.h"
-        PATH_SUFFIXES  "SOIL"
+        PATH_SUFFIXES "SOIL"
 )
 
 
