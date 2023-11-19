@@ -114,7 +114,7 @@ std::vector<float> Model::load_model(const char *file_path, int &out_number_of_v
     for (int i = 0; i < mesh->mNumFaces; ++i) {
         aiFace face = mesh->mFaces[i];
 
-        for (int j = 0; j < face.mNumIndices; ++j) {
+        for (int j = 0; j < 3; ++j) {
             int id = face.mIndices[j];
 
             //Vertex position

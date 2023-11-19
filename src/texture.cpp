@@ -9,7 +9,7 @@ Texture::Texture(const std::string &filepath) {
     this->texture_id = SOIL_load_OGL_texture(filepath.c_str(),
                                              SOIL_LOAD_RGBA,
                                              SOIL_CREATE_NEW_ID,
-                                             0);
+                                             SOIL_FLAG_INVERT_Y);
 
     if (!this->texture_id) {
         std::cout << "An error occurred while loading texture." << std::endl;

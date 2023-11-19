@@ -80,6 +80,7 @@ void main()
             if (lights[i].type == 2)
             {
                 float theta = dot(light_direction, normalize(-lights[i].direction));
+                spotlight_intensity = (theta - lights[i].cut_off) / (1 - lights[i].cut_off);
                 if (theta <= lights[i].cut_off)
                 continue;
             }

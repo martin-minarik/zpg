@@ -16,6 +16,8 @@
 #include "scenes/scene_forest.h"
 #include "scenes/scene_test_3.h"
 #include "scenes/scene_solar_system.h"
+#include "scenes/scene_week_9.h"
+#include "scenes/scene_week_9_night.h"
 
 #include "camera.h"
 #include "vector"
