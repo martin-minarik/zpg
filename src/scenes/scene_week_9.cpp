@@ -47,28 +47,28 @@ void SceneWeek9::init_materials() {
 
     {
         auto material = new Material();
-        auto texture = std::make_shared<Texture>("resources\\textures\\Tank_Body.BMP");
+        auto texture = std::make_shared<Texture>("resources\\textures\\tiger_normal_baked.png");
         material->set_texture(texture);
         this->materials["tiger_normal_material"] = material;
     }
 
     {
         auto material = new Material();
-        auto texture = std::make_shared<Texture>("resources\\textures\\Tank_Body_Forest.BMP");
+        auto texture = std::make_shared<Texture>("resources\\textures\\tiger_forest_baked.png");
         material->set_texture(texture);
         this->materials["tiger_forest_material"] = material;
     }
 
     {
         auto material = new Material();
-        auto texture = std::make_shared<Texture>("resources\\textures\\Tank_Body_Desert.BMP");
+        auto texture = std::make_shared<Texture>("resources\\textures\\tiger_desert_baked.png");
         material->set_texture(texture);
         this->materials["tiger_desert_material"] = material;
     }
 
     {
         auto material = new Material();
-        auto texture = std::make_shared<Texture>("resources\\textures\\Tank_Body_Snow.BMP");
+        auto texture = std::make_shared<Texture>("resources\\textures\\tiger_snow_baked.png");
         material->set_texture(texture);
         this->materials["tiger_snow_material"] = material;
     }
@@ -102,6 +102,7 @@ void SceneWeek9::init_models() {
     this->models["uv_plain"] = ModelFactory::create_by_name("uv_plain");
     this->models["house"] = ModelFactory::create_from_file("resources\\models\\model.obj");
     this->models["tiger"] = ModelFactory::create_from_file("resources\\models\\tiger_fix.obj");
+    this->models["tiger_baked"] = ModelFactory::create_from_file("resources\\models\\tiger_fix_uv.obj");
     this->models["bush"] = ModelFactory::create_by_name("bushes");
 }
 
@@ -160,21 +161,21 @@ void SceneWeek9::init_drawable_objects() {
     auto sphere4 = new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material4"]);
     drawable_objects.push_back(sphere4);
 
-    auto tiger_normal = new DrawableObject(
-            *models["tiger"], *shaders["blinn"], *materials["tiger_normal_material"]);
-    drawable_objects.push_back(tiger_normal);
+    auto tiger_snow = new DrawableObject(
+            *models["tiger_baked"], *shaders["lambert"], *materials["tiger_snow_material"]);
+    drawable_objects.push_back(tiger_snow);
 
     auto tiger_forest = new DrawableObject(
-            *models["tiger"], *shaders["phong"], *materials["tiger_forest_material"]);
+            *models["tiger_baked"], *shaders["phong"], *materials["tiger_forest_material"]);
     drawable_objects.push_back(tiger_forest);
 
-    auto tiger_desert = new DrawableObject(
-            *models["tiger"], *shaders["lambert"], *materials["tiger_desert_material"]);
-    drawable_objects.push_back(tiger_desert);
+    auto tiger_normal = new DrawableObject(
+            *models["tiger_baked"], *shaders["blinn"], *materials["tiger_normal_material"]);
+    drawable_objects.push_back(tiger_normal);
 
-    auto tiger_snow = new DrawableObject(
-            *models["tiger"], *shaders["lambert"], *materials["tiger_snow_material"]);
-    drawable_objects.push_back(tiger_snow);
+    auto tiger_desert = new DrawableObject(
+            *models["tiger_baked"], *shaders["lambert"], *materials["tiger_desert_material"]);
+    drawable_objects.push_back(tiger_desert);
 
     for (int i = 0; i < 100; ++i) {
         auto random_x = (rand() % (24 - 0 + 1) + 0) - 12;
