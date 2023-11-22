@@ -19,6 +19,10 @@ void Application::run() {
 
 void Application::loop() {
     glEnable(GL_DEPTH_TEST);
+
+    glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
     auto last_time = (float) glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
         const auto now = (float) glfwGetTime();
@@ -26,7 +30,7 @@ void Application::loop() {
         last_time = now;
 
         // clear color and depth buffer
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         scene->draw();
 

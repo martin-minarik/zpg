@@ -49,7 +49,10 @@ void Scene::draw() {
     this->draw_skybox();
 
     for (auto &drawable_object: drawable_objects)
+    {
+        glStencilFunc(GL_ALWAYS, drawable_object->get_id(), 0xFF);
         drawable_object->draw();
+    }
 }
 
 void Scene::draw_skybox() {

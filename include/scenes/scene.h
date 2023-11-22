@@ -4,6 +4,11 @@
 // Created by Martin Minarik
 //
 
+// Include Glew
+#include "GL/glew.h"
+// Include GLFW
+#include "GLFW/glfw3.h"
+
 // std
 #include <vector>
 #include <map>

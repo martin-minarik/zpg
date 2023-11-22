@@ -149,16 +149,20 @@ void SceneWeek9::init_drawable_objects() {
     auto house1 = new DrawableObject(*models["house"], *shaders["lambert"], *materials["house_material"]);
     drawable_objects.push_back(house1);
 
-    auto sphere1 = new DrawableObject(*models["sphere"], *shaders["constant"], *materials["material1"]);
+    auto sphere1 = new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material4"]);
+    sphere1->set_id(1);
     drawable_objects.push_back(sphere1);
 
     auto sphere2 = new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material2"]);
+    sphere2->set_id(2);
     drawable_objects.push_back(sphere2);
 
-    auto sphere3 = new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material3"]);
+    auto sphere3 = new DrawableObject(*models["sphere"], *shaders["constant"], *materials["material1"]);
+    sphere3->set_id(3);
     drawable_objects.push_back(sphere3);
 
-    auto sphere4 = new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material4"]);
+    auto sphere4 = new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material3"]);
+    sphere4->set_id(4);
     drawable_objects.push_back(sphere4);
 
     auto tiger_snow = new DrawableObject(
@@ -186,10 +190,10 @@ void SceneWeek9::init_drawable_objects() {
         drawable_objects.push_back(obj);
     }
 
-    sphere1->add_translation(glm::vec3(2, 1, -2), false);
+    sphere1->add_translation(glm::vec3(-6, 1, -2), false);
     sphere2->add_translation(glm::vec3(-2, 1, -2), false);
-    sphere3->add_translation(glm::vec3(6, 1, -2), false);
-    sphere4->add_translation(glm::vec3(-6, 1, -2), false);
+    sphere3->add_translation(glm::vec3(2, 1, -2), false);
+    sphere4->add_translation(glm::vec3(6, 1, -2), false);
 
     tiger_normal->add_translation(glm::vec3(3, 0, -10), false);
     tiger_forest->add_translation(glm::vec3(-3, 0, -10), false);

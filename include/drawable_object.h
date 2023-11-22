@@ -19,8 +19,13 @@ public:
     explicit DrawableObject(Model &model, Shader &shader, Material &material);
     void draw();
 
+    [[nodiscard]] int get_id() const;
+
+    void set_id(int id);
+
 private:
     Shader &shader;
     Model &model;
     Material &material;
+    int id = 1;
 };

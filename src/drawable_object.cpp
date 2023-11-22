@@ -16,3 +16,13 @@ void DrawableObject::draw() {
     model.draw();
     shader.unbind();
 }
+
+int DrawableObject::get_id() const
+{
+    return id;
+}
+
+void DrawableObject::set_id(int id)
+{
+    DrawableObject::id = id;
+}

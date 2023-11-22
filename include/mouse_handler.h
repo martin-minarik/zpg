@@ -29,6 +29,8 @@ public:
 private:
     std::vector<int> pressed_buttons;
     Camera *camera = nullptr;
+    double cursor_position_x;
+    double cursor_position_y;
 
     MouseHandler() = default;
 
