@@ -21,8 +21,7 @@
 #include "observable.h"
 
 
-class Camera : public Observable<Camera>
-{
+class Camera : public Observable<Camera> {
 public:
     Camera();
 

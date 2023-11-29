@@ -23,10 +23,10 @@ void Camera::process_mouse_movement(float diff_x, float diff_y, float delta_time
     alpha += diff_x * delta_time * this->mouse_speed;
     fi += -diff_y * delta_time * this->mouse_speed;
 
-    if (fi > 90.0f)
-        fi = 90.0f;
-    if (fi < -90.0f)
-        fi = -90.0f;
+    if (fi > 89.0f)
+        fi = 89.0f;
+    if (fi < -89.0f)
+        fi = -89.0f;
 
     target.x = glm::cos(glm::radians(alpha)) * glm::cos(glm::radians(fi));
     target.y = glm::sin(glm::radians(fi));
