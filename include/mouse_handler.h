@@ -26,11 +26,15 @@ public:
 
     void set_camera(Camera *camera);
 
+    int get_cursor_object_index();
+    glm::vec3 get_cursor_global_position();
+
 private:
     std::vector<int> pressed_buttons;
     Camera *camera = nullptr;
     double cursor_position_x;
     double cursor_position_y;
+
 
     MouseHandler() = default;
 

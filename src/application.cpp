@@ -117,3 +117,7 @@ void Application::set_scene(Scene *scene_) {
     this->scene = scene_;
     this->scene->init();
 }
+
+Scene *Application::get_current_scene() const {
+    return scene;
+}

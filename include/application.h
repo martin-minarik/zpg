@@ -46,6 +46,8 @@ public:
 
     void set_scene(Scene * scene_);
 
+    Scene *get_current_scene() const;
+
 private:
     Application() = default;
 
@@ -60,6 +62,8 @@ private:
     static void print_opengl_info();
 
     static void error_callback(int error, const char *description);
+
+
 
 private:
     GLFWwindow *window = nullptr;

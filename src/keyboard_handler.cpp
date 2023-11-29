@@ -43,6 +43,12 @@ void KeyBoardHandler::key_callback(GLFWwindow *window, int key, int scancode, in
                 Application::get_instance().set_scene(new SceneForest());
                 break;
 
+            case GLFW_KEY_T: {
+                auto scene = Application::get_instance().get_current_scene();
+                scene->interact_spawn_object(MouseHandler::get_instance().get_cursor_global_position());
+            }
+                break;
+
             default:
                 pressed_keys.push_back(key);
                 break;

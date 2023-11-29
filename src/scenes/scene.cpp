@@ -66,6 +66,18 @@ void Scene::update(float delta_time) {
 
 }
 
+//void Scene::spawn_object(glm::vec3 position, std::string model, std::string shader, std::string material) {
+//
+//}
+
+
+void Scene::interact_spawn_object(glm::vec3 position) {
+
+}
+
+void Scene::interact_remove_object(int id) {
+
+}
 
 
 

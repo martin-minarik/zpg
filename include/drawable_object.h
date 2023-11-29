@@ -27,5 +27,5 @@ private:
     Shader &shader;
     Model &model;
     Material &material;
-    int id = 1;
+    int id = 0;
 };

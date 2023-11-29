@@ -55,23 +55,8 @@ void MouseHandler::mouse_button_callback(GLFWwindow *window, int button, int act
     if (action == GLFW_PRESS) {
         pressed_buttons.push_back(button);
         if (button == GLFW_MOUSE_BUTTON_1) {
-            GLbyte color[4];
-            GLfloat depth;
-            GLuint index;
-
-            GLint x = (GLint) this->cursor_position_x;
-            GLint y = (GLint) this->cursor_position_y;
-
-
-            int width, height;
-            glfwGetFramebufferSize(window, &width, &height);
-            int newy = height - y - 10;
-
-            glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
-            glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
-            glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
-            printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u\n",
-                   x, y, color[0], color[1], color[2], color[3], depth, index);
+            auto scene = Application::get_instance().get_current_scene();
+            scene->interact_remove_object(this->get_cursor_object_index());
         }
 
 
@@ -81,4 +66,39 @@ void MouseHandler::mouse_button_callback(GLFWwindow *window, int button, int act
                                           button),
                               pressed_buttons.end());
     }
+}
+
+int MouseHandler::get_cursor_object_index() {
+    auto window = Application::get_instance().get_window();
+
+    GLuint index;
+
+    GLint x = (GLint) this->cursor_position_x;
+    GLint y = (GLint) this->cursor_position_y;
+
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    int newy = height - y;
+    glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+
+    return index;
+}
+
+glm::vec3 MouseHandler::get_cursor_global_position() {
+    auto window = Application::get_instance().get_window();
+
+    GLfloat depth;
+    GLint x = (GLint) this->cursor_position_x;
+    GLint y = (GLint) this->cursor_position_y;
+
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    int newy = height - y;
+
+    glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+
+    glm::vec3 screenX = glm::vec3{x, newy, depth};
+    glm::vec4 viewport{0, 0, width, height};
+
+    return glm::unProject(screenX, camera->view_matrix, camera->projection_matrix, viewport);
 }

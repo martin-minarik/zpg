@@ -80,6 +80,13 @@ void SceneWeek9::init_materials() {
         this->materials["house_material"] = material;
     }
 
+    {
+        auto material = new Material();
+        auto texture = std::make_shared<Texture>("resources\\textures\\tree.png");
+        material->set_texture(texture);
+        this->materials["tree_material"] = material;
+    }
+
 }
 
 void SceneWeek9::init_camera() {
@@ -103,6 +110,7 @@ void SceneWeek9::init_models() {
     this->models["house"] = ModelFactory::create_from_file("resources\\models\\model.obj");
     this->models["tiger"] = ModelFactory::create_from_file("resources\\models\\tiger_fix.obj");
     this->models["tiger_baked"] = ModelFactory::create_from_file("resources\\models\\tiger_fix_uv.obj");
+    this->models["tree"] = ModelFactory::create_from_file("resources\\models\\tree.obj");
     this->models["bush"] = ModelFactory::create_by_name("bushes");
 }
 
@@ -143,9 +151,6 @@ void SceneWeek9::init_drawable_objects() {
     auto house2 = new DrawableObject(*models["house"], *shaders["lambert"], *materials["house_material"]);
     drawable_objects.push_back(house2);
 
-    auto floor = new DrawableObject(*models["uv_plain"], *shaders["lambert"], *materials["floor_material"]);
-    drawable_objects.push_back(floor);
-
     auto house1 = new DrawableObject(*models["house"], *shaders["lambert"], *materials["house_material"]);
     drawable_objects.push_back(house1);
 
@@ -181,6 +186,9 @@ void SceneWeek9::init_drawable_objects() {
             *models["tiger_baked"], *shaders["lambert"], *materials["tiger_desert_material"]);
     drawable_objects.push_back(tiger_desert);
 
+    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]));
+
+
     for (int i = 0; i < 100; ++i) {
         auto random_x = (rand() % (24 - 0 + 1) + 0) - 12;
         auto random_z = (rand() % (30 - 0 + 1) + 0) - 15;
@@ -189,6 +197,12 @@ void SceneWeek9::init_drawable_objects() {
 
         drawable_objects.push_back(obj);
     }
+
+    for (auto obj: drawable_objects)
+        obj->set_id(++(this->last_index));
+
+    auto floor = new DrawableObject(*models["uv_plain"], *shaders["lambert"], *materials["floor_material"]);
+    drawable_objects.push_back(floor);
 
     sphere1->add_translation(glm::vec3(-6, 1, -2), false);
     sphere2->add_translation(glm::vec3(-2, 1, -2), false);
@@ -223,4 +237,31 @@ void SceneWeek9::init_skybox() {
                                             "resources\\textures\\negz.jpg");
 
     this->skybox = std::make_shared<SkyBox>(*shaders["skybox"], texture);
+}
+
+
+void SceneWeek9::interact_spawn_object(glm::vec3 position) {
+    auto obj = new DrawableObject(*models["tree"], *shaders["lambert"], *materials["tree_material"]);
+    drawable_objects.push_back(obj);
+    obj->set_id(++(this->last_index));
+    obj->add_translation(position, false);
+    obj->add_scale(glm::vec3(0.1), true);
+}
+
+void SceneWeek9::interact_remove_object(int id) {
+    if (id == 0)
+        return;
+
+    auto it = std::find_if(drawable_objects.begin(), drawable_objects.end(), [&](DrawableObject *obj) {
+        return obj->get_id() == id;
+    });
+
+
+    printf("id %d\n", id);
+    if (it != drawable_objects.end()) {
+        auto obj = *it;
+        drawable_objects.erase(it);
+        delete obj;
+    } else
+        printf("Not found!\n");
 }

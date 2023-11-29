@@ -38,6 +38,10 @@ public:
 
     virtual void update(float delta_time);
 
+    virtual void interact_spawn_object(glm::vec3 position);
+    virtual void interact_remove_object(int id);
+
+
 protected:
     virtual void init_shader() = 0;
 

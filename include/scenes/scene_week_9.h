@@ -10,14 +10,16 @@
 #include "light/directional_light.h"
 
 
-
 class SceneWeek9 : public Scene {
+public:
+    void interact_spawn_object(glm::vec3 position) override;
+    void interact_remove_object(int id) override;
+
 private:
     void init_shader() override;
 
     void init_models() override;
 
-private:
     void init_materials() override;
 
     void init_camera() override;
@@ -27,4 +29,6 @@ private:
     void init_drawable_objects() override;
 
     void init_skybox() override;
+
+    int last_index = 0;
 };
