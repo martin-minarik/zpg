@@ -25,22 +25,27 @@ SkyBox::SkyBox(Shader &shader, const shared_ptr<SkyBoxTexture> &texture)
 }
 
 void SkyBox::draw() {
-//    glEnable(GL_DEPTH_CLAMP);
-//    glDepthMask(GL_FALSE);
     shader.use();
     shader.upload_texture(this->texture.get());
+    shader.upload("intensity", this->intensity);
 
     glBindVertexArray(this->VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
-
     shader.unbind();
-//    glDepthMask(GL_TRUE);
 }
 
 SkyBox::~SkyBox() {
     glDeleteBuffers(1, &VBO);
     glDeleteVertexArrays(1, &VAO);
+}
+
+float SkyBox::get_intensity() const {
+    return intensity;
+}
+
+void SkyBox::set_intensity(float intensity) {
+    SkyBox::intensity = intensity;
 }
 
 

@@ -18,6 +18,10 @@ public:
 
     virtual ~SkyBox();
 
+    [[nodiscard]] float get_intensity() const;
+
+    void set_intensity(float intensity);
+
     void draw();
 
 private:
@@ -25,6 +29,6 @@ private:
     GLuint VBO = 0;
     GLuint VAO = 0;
     std::shared_ptr<SkyBoxTexture> texture;
-
+    float intensity = 1;
 };
 

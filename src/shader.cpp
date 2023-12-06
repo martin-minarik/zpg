@@ -103,7 +103,6 @@ void Shader::update(Camera *camera) {
     this->upload("view_matrix", camera->view_matrix);
     this->upload("camera_position", camera->get_eye());
 
-//    printf("%.2f %.2f %.2f\n", camera->get_eye().x, camera->get_eye().y, camera->get_eye().z);
 }
 
 void Shader::update(Light *light, int descriptor) {

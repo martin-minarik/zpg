@@ -202,13 +202,14 @@ void SceneWeek9Night::init_drawable_objects() {
 }
 
 void SceneWeek9Night::init_skybox() {
-//    auto texture =
-//            std::make_shared<SkyBoxTexture>("resources\\textures\\posx.jpg",
-//                                            "resources\\textures\\negx.jpg",
-//                                            "resources\\textures\\posy.jpg",
-//                                            "resources\\textures\\negy.jpg",
-//                                            "resources\\textures\\posz.jpg",
-//                                            "resources\\textures\\negz.jpg");
-//
-//    this->skybox = std::make_shared<SkyBox>(*shaders["skybox"], texture);
+    auto texture =
+            std::make_shared<SkyBoxTexture>("resources\\textures\\posx.jpg",
+                                            "resources\\textures\\negx.jpg",
+                                            "resources\\textures\\posy.jpg",
+                                            "resources\\textures\\negy.jpg",
+                                            "resources\\textures\\posz.jpg",
+                                            "resources\\textures\\negz.jpg");
+
+    this->skybox = std::make_shared<SkyBox>(*shaders["skybox"], texture);
+    this->skybox->set_intensity(0.2f);
 }
