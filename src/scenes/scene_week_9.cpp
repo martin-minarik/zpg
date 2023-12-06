@@ -22,10 +22,10 @@ void SceneWeek9::init_shader() {
 }
 
 void SceneWeek9::init_materials() {
-    this->materials["material1"] = new Material({0.3, 0.7, 0.3, 1});
+    this->materials["material1"] = new Material();
     this->materials["material2"] = new Material({0.7, 0.3, 0.3, 1});
-    this->materials["material3"] = new Material({0.3, 0.3, 0.7, 1});
-    this->materials["material4"] = new Material();
+    this->materials["material3"] = new Material({0.3, 0.7, 0.3, 1});
+    this->materials["material4"] = new Material({0.3, 0.3, 0.7, 1});
 
     this->materials["bush_material"] = new Material(glm::vec4{0.2, 0.6, 0.2, 1});
 
@@ -154,7 +154,7 @@ void SceneWeek9::init_drawable_objects() {
     auto house1 = new DrawableObject(*models["house"], *shaders["lambert"], *materials["house_material"]);
     drawable_objects.push_back(house1);
 
-    auto sphere1 = new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material4"]);
+    auto sphere1 = new DrawableObject(*models["sphere"], *shaders["blinn"], *materials["material1"]);
     sphere1->set_id(1);
     drawable_objects.push_back(sphere1);
 
@@ -162,11 +162,11 @@ void SceneWeek9::init_drawable_objects() {
     sphere2->set_id(2);
     drawable_objects.push_back(sphere2);
 
-    auto sphere3 = new DrawableObject(*models["sphere"], *shaders["constant"], *materials["material1"]);
+    auto sphere3 = new DrawableObject(*models["sphere"], *shaders["constant"], *materials["material3"]);
     sphere3->set_id(3);
     drawable_objects.push_back(sphere3);
 
-    auto sphere4 = new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material3"]);
+    auto sphere4 = new DrawableObject(*models["sphere"], *shaders["phong"], *materials["material4"]);
     sphere4->set_id(4);
     drawable_objects.push_back(sphere4);
 
@@ -186,7 +186,6 @@ void SceneWeek9::init_drawable_objects() {
             *models["tiger_baked"], *shaders["lambert"], *materials["tiger_desert_material"]);
     drawable_objects.push_back(tiger_desert);
 
-    drawable_objects.push_back(new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]));
 
 
     for (int i = 0; i < 100; ++i) {
@@ -203,6 +202,46 @@ void SceneWeek9::init_drawable_objects() {
 
     auto floor = new DrawableObject(*models["uv_plain"], *shaders["lambert"], *materials["floor_material"]);
     drawable_objects.push_back(floor);
+
+
+    auto bezier_points = glm::mat4x3(
+            glm::vec3(-1, 0, -1),
+            glm::vec3(2, 0, -1),
+            glm::vec3(-1, 0, 1),
+            glm::vec3(1, 0, 2));
+
+
+
+    bezier_points *= 5;
+    this->bezier = std::make_shared<Bezier>(bezier_points, 0.5f);
+
+    {
+        auto moving_sphere = new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]);
+        drawable_objects.push_back(moving_sphere);
+        moving_sphere->add_translation(glm::vec3(-3, 1, 10), false);
+        moving_sphere->add_transform(this->bezier, false);
+        moving_sphere->add_scale(glm::vec3(0.3), false);
+        this->moving_objects.push_back(moving_sphere);
+    }
+
+    {
+        auto moving_sphere = new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]);
+        drawable_objects.push_back(moving_sphere);
+        moving_sphere->add_translation(glm::vec3(3, 1, 10), false);
+        moving_sphere->add_transform(this->bezier, false);
+        moving_sphere->add_scale(glm::vec3(0.3), false);
+        this->moving_objects.push_back(moving_sphere);
+    }
+
+    {
+        auto moving_sphere = new DrawableObject(*models["sphere"], *shaders["lambert"], *materials["material4"]);
+        drawable_objects.push_back(moving_sphere);
+        moving_sphere->add_translation(glm::vec3(0, 1, 10), false);
+        moving_sphere->add_transform(this->bezier, false);
+        moving_sphere->add_scale(glm::vec3(0.75), false);
+        this->moving_objects.push_back(moving_sphere);
+    }
+
 
     sphere1->add_translation(glm::vec3(-6, 1, -2), false);
     sphere2->add_translation(glm::vec3(-2, 1, -2), false);
@@ -264,4 +303,20 @@ void SceneWeek9::interact_remove_object(int id) {
         delete obj;
     } else
         printf("Not found!\n");
+}
+
+void SceneWeek9::update(float delta_time) {
+    static float param_t = 0.5;
+    static float bezier_speed = 0.35;
+
+    this->bezier->set_param_t(param_t);
+
+    for(auto moving_object: this->moving_objects)
+        moving_object->apply_transform();
+
+
+    if (param_t >= 1.0f || param_t <= 0.0f)
+        bezier_speed *= -1;
+
+    param_t += bezier_speed * delta_time;
 }

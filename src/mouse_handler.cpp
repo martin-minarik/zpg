@@ -68,13 +68,13 @@ void MouseHandler::mouse_button_callback(GLFWwindow *window, int button, int act
     }
 }
 
-int MouseHandler::get_cursor_object_index() {
+int MouseHandler::get_cursor_object_index() const {
     auto window = Application::get_instance().get_window();
 
     GLuint index;
 
-    GLint x = (GLint) this->cursor_position_x;
-    GLint y = (GLint) this->cursor_position_y;
+    auto x = (GLint) this->cursor_position_x;
+    auto y = (GLint) this->cursor_position_y;
 
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
@@ -88,8 +88,8 @@ glm::vec3 MouseHandler::get_cursor_global_position() {
     auto window = Application::get_instance().get_window();
 
     GLfloat depth;
-    GLint x = (GLint) this->cursor_position_x;
-    GLint y = (GLint) this->cursor_position_y;
+    auto x = (GLint) this->cursor_position_x;
+    auto y = (GLint) this->cursor_position_y;
 
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);

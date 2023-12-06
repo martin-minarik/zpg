@@ -26,7 +26,7 @@ public:
 
     void set_camera(Camera *camera);
 
-    int get_cursor_object_index();
+    int get_cursor_object_index() const;
     glm::vec3 get_cursor_global_position();
 
 private:

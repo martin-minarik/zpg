@@ -39,25 +39,25 @@ void Camera::process_mouse_movement(float diff_x, float diff_y, float delta_time
 }
 
 void Camera::move_left(float delta_time) {
-    eye += -(glm::normalize(glm::cross(target, up))) * 5.f * delta_time;
+    eye += -(glm::normalize(glm::cross(target, up))) * 8.f * delta_time;
     calc_view_matrix();
     notify_observers();
 }
 
 void Camera::move_right(float delta_time) {
-    eye += (glm::normalize(glm::cross(target, up))) * 5.f * delta_time;
+    eye += (glm::normalize(glm::cross(target, up))) * 8.f * delta_time;
     calc_view_matrix();
     notify_observers();
 }
 
 void Camera::move_forward(float delta_time) {
-    eye += glm::normalize(target) * 5.f * delta_time;
+    eye += glm::normalize(target) * 8.f * delta_time;
     calc_view_matrix();
     notify_observers();
 }
 
 void Camera::move_backward(float delta_time) {
-    eye += -glm::normalize(target) * 5.f * delta_time;
+    eye += -glm::normalize(target) * 8.f * delta_time;
     calc_view_matrix();
     notify_observers();
 }
